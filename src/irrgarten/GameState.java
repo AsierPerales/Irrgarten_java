@@ -38,5 +38,31 @@ public class GameState {
         this.winner = winner;
         this.log = log;
     }
+
+    public String getLabyrinth() {
+        return labyrinth;
+    }
+
+    public String getPlayers() {
+        return players;
+    }
+
+    public String getMonsters() {
+        return monsters;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public String getLog() {
+        return log;
+    }
+    
+    
 }
 
