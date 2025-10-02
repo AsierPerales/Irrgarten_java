@@ -62,7 +62,11 @@ public class Dice {
    public float randomIntelligence() {
        return generator.nextFloat(MAX_INTELLIGENCE);
    }
-
+// TEMA REDONDEO Y ESO ???
+//    float value = generator.nextFloat(MAX_INTELLIGENCE);
+//    return Math.round(value * 10.0f) / 10.0f;   // redondea a 1 decimal
+//    return Math.round(value * 100.0f) / 100.0f; // redondea a 2 decimales
+   
    /**
     * Genera un valor aleatorio de fuerza en el intervalo [0, MAX_STRENGTH).
     *
@@ -84,32 +88,32 @@ public class Dice {
 
    /**
     * Devuelve la cantidad de armas obtenidas como recompensa al ganar
-    * un combate. El valor está en el intervalo [0, WEAPONS_REWARD).
+    * un combate. El valor está en el intervalo [0, WEAPONS_REWARD].
     *
     * @return número de armas de recompensa
     */
    public int weaponsReward() {
-       return generator.nextInt(WEAPONS_REWARD);
+       return generator.nextInt(WEAPONS_REWARD+1);
    }
 
    /**
     * Devuelve la cantidad de escudos obtenidos como recompensa al ganar
-    * un combate. El valor está en el intervalo [0, SHIELDS_REWARD).
+    * un combate. El valor está en el intervalo [0, SHIELDS_REWARD].
     *
     * @return número de escudos de recompensa
     */
    public int shieldsReward() {
-       return generator.nextInt(SHIELDS_REWARD);
+       return generator.nextInt(SHIELDS_REWARD+1);
    }
 
    /**
     * Devuelve la cantidad de unidades de salud obtenidas como recompensa
-    * al ganar un combate. El valor está en el intervalo [0, HEALTH_REWARD).
+    * al ganar un combate. El valor está en el intervalo [0, HEALTH_REWARD].
     *
     * @return unidades de salud de recompensa
     */
    public int healthReward() {
-       return generator.nextInt(HEALTH_REWARD);
+       return generator.nextInt(HEALTH_REWARD+1);
    }
 
    /**
@@ -137,7 +141,7 @@ public class Dice {
     * @return numero de usos restantes
     */
    public int usesLeft(){
-       return generator.nextInt(MAX_USES);
+       return generator.nextInt(MAX_USES+1);
    }
    
    /**
