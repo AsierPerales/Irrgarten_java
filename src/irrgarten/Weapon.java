@@ -23,6 +23,10 @@ public class Weapon {
         
     }
     
+    /**
+     * Utiliza el arma si y solo si tiene usos restantes, si no devuelve usos (0)
+     * @return si usos > 0 devuelve @power, si no devuelve @uses (0) 
+     */
     public float attack(){
         if (this.uses > 0){
             uses --;

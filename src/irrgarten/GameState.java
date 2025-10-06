@@ -39,26 +39,50 @@ public class GameState {
         this.log = log;
     }
 
+    /**
+     *
+     * @return 
+     */
     public String getLabyrinth() {
         return labyrinth;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPlayers() {
         return players;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMonsters() {
         return monsters;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isWinner() {
         return winner;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLog() {
         return log;
     }
