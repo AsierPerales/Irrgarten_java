@@ -8,7 +8,7 @@ package irrgarten;
  *
  * @author asier
  */
-public class TestP1 {
+public class TestP2 {
     public static void main(String[] args) {
         
         // Crea varias instancias de cada clase creada en esta práctica y utiliza todos sus métodos.
