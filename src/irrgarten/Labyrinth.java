@@ -24,13 +24,26 @@ public class Labyrinth {
     
     private Monster[][] monsters;
     private Player[][] players;
-    private char[][] labirynth;
+    private char[][] labyrinth;
 
     public Labyrinth(int nRows, int nCols, int exitRow, int exitCol) {
         this.nRows = nRows;
         this.nCols = nCols;
         this.exitRow = exitRow;
         this.exitCol = exitCol;
+        
+        monsters=new Monster[nRows][nCols];
+        players=new Player[nRows][nCols];
+        labyrinth=new char[nRows][nCols];
+        for(int i = 0; i<nRows;i++){
+            
+            for(int j = 0; j<nCols; j++){          
+                monsters[i][j]=null;
+                players[i][j]=null;
+                labyrinth[i][j]=EMPTY_CHAR;                                               
+            }                        
+        }                
+       labyrinth[exitRow][exitCol]=EXIT_CHAR;  
     }
     
     

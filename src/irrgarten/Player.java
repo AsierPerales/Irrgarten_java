@@ -134,7 +134,7 @@ public class Player {
      * @return
      */
     public float attack(){
-        float ataque = this.strength + this.sumWeapons();
+        return this.strength + this.sumWeapons();
     }
     
     //P3 :)

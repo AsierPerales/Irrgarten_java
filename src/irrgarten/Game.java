@@ -28,12 +28,13 @@ public class Game {
         monsters = new ArrayList<>();
         currentRound = 0;
         log="";
-        labyrinth = new Labyrinth(6,10,dado.randomPos(6)
-                ,dado.randomPos(10));
+        labyrinth = new Labyrinth(6, 7, dado.randomPos(6), dado.randomPos(7));
         
         currentPlayerIndex = 0;
         for(int i =0; i<nplayers; i++){            
-            Player jug = new Player((char) ('0' + i+1),dado.randomIntelligence(),dado.randomStrength());
-            players.add(jug);                     
+            Player jugador;
+            jugador = new Player((char) ('0' + i+1),dado.randomIntelligence(),dado.randomStrength());
+            players.add(jugador);                     
         }
+    }
 }
