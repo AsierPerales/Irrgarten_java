@@ -98,8 +98,8 @@ public class Game {
     
     private void nextPlayer(){}
     
-    private void logPlayerWon() {
-        log += "El jugador " +(this.currentPlayerIndex)+ "ha ganado el combate.\n";
+    public void logPlayerWon() {
+        log += "El jugador " +(this.currentPlayerIndex)+ " ha ganado el combate.\n";
     }
 
     private void logMonsterWon() {

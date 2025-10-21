@@ -62,8 +62,19 @@ public class Labyrinth {
      */
     @Override
     public String toString() {
-        return "Labyrinth{" + "labyrinth=" + Arrays.toString(labyrinth) + '}';
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nCols; j++) {
+                sb.append(labyrinth[i][j]).append(" "); // separador entre columnas
+            }
+            sb.append("\n"); // salto de línea entre filas
+        }
+
+        return sb.toString();
     }
+
+    
 
     /**
      *
@@ -74,6 +85,7 @@ public class Labyrinth {
     public void addMonster(int row, int col, Monster monster){
         if (posOK(row,col) && emptyPos(row,col)){
             monsters[row][col] = monster;
+            labyrinth[row][col] = MONSTER_CHAR;
         }
     }
 
