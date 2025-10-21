@@ -1,8 +1,8 @@
-package irrgarten.controller;
+package irrgartenController;
 
-import irrgarten.Directions;
-import irrgarten.Game;
-import irrgarten.UI.TextUI;
+import irrgartenGame.Directions;
+import irrgartenGame.*;
+import irrgartenTextUI.TextUI;
 
 
 public class Controller {
