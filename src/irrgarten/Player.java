@@ -108,6 +108,7 @@ public class Player {
     public Weapon newWeapon(){
         Dice dadoArma = new Dice();
         Weapon armaNueva = new Weapon(dadoArma.weaponPower(),dadoArma.usesLeft());
+        weapons.add(armaNueva);
         return armaNueva;
     }
     
@@ -118,6 +119,7 @@ public class Player {
     public Shield newShield(){
         Dice dadoEscudo = new Dice();
         Shield escudoNuevo = new Shield(dadoEscudo.shieldPower(),dadoEscudo.usesLeft());
+        shields.add(escudoNuevo);
         return escudoNuevo;
     }
     
@@ -126,7 +128,13 @@ public class Player {
      * @return
      */
     public float sumWeapons(){
-        return weapons.get(0).attack() + weapons.get(0).attack();
+        float suma = 0;
+        
+        for (Weapon w : weapons) {
+            suma += w.attack();
+        }
+        
+        return suma;
     }
     
     /**
@@ -154,7 +162,13 @@ public class Player {
      * @return
      */
     public float sumShields(){
-        return this.shields.get(0).protect() + this.shields.get(1).protect();
+        float suma = 0;
+        
+        for (Shield s : shields) {
+            suma += s.protect();
+        }
+        
+        return suma;
     }
     
     /**
@@ -200,7 +214,7 @@ public class Player {
      */
     @Override
     public String toString() {
-        return "Player{" + "name=" + name + ", number=" + number + ", intelligence=" + intelligence + ", strength=" + strength + ", health=" + health + ", row=" + row + ", col=" + col + ", consecutiveHits=" + consecutiveHits + ", weapons=" + weapons + ", shiels=" + shields + '}';
+        return "Player{" + "name=" + name + ", number=" + number + ", intelligence=" + intelligence + ", strength=" + strength + ", health=" + health + ", row=" + row + ", col=" + col + ", consecutiveHits=" + consecutiveHits + ", weapons=" + weapons + ", shields=" + shields + '}';
     }
     
     /*
