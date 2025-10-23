@@ -122,7 +122,8 @@ public class Dice {
     * @return poder del arma
     */
    public float weaponPower() {
-       return generator.nextFloat(MAX_ATTACK);
+       float wPower = generator.nextFloat(MAX_ATTACK);
+       return Math.round(wPower * 100) / 100f;
    }
 
    /**
@@ -131,8 +132,8 @@ public class Dice {
     * @return poder del escudo
     */
    public float shieldPower() {
-       return generator.nextFloat(MAX_SHIELD);
-   }
+        float sPower = generator.nextFloat(MAX_SHIELD);
+       return Math.round(sPower * 100) / 100f;   }
 
    /**
     * devuelve el número de usos que se asignará a un arma o escudo

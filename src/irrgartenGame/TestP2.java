@@ -37,7 +37,12 @@ public class TestP2 {
         
 
         Weapon arma1 = player1.newWeapon();
+                Weapon arma2 = player1.newWeapon();
+
         Shield escudo1 = player1.newShield();
+        
+        System.out.println(player1.toString());
+
         
         //System.out.println(player1.attack() + " ataca!");
         //System.out.println(player1.defensiveEnergy() + " defiende!");
