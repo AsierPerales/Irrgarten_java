@@ -26,6 +26,8 @@ public class Player {
     
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
+    
+    Dice dado;
 
     public Player(char number, float intelligence, float strength) {
         this.name = "Player#" + number;
@@ -35,6 +37,8 @@ public class Player {
         this.health = INITIAL_HEALTH;
         this.weapons = new ArrayList<>();
         this.shields = new ArrayList<>();
+        
+        this.dado = new Dice();
     }
     
     /**
@@ -97,8 +101,11 @@ public class Player {
      * @param validMoves
      * @return
      */
-    public Directions move(Directions direction, Directions[] validMoves){
-        throw new UnsupportedOperationException();
+    public Directions move(Directions direction, ArrayList<Directions> validMoves){   
+        if (!validMoves.isEmpty() && !(validMoves.contains(direction))){
+            return validMoves.get(0);
+        }
+        return direction;
     }
     
     /**
@@ -153,8 +160,7 @@ public class Player {
      * @return
      */
     public boolean defend(float receivedAttack){
-        // manageHit() ???
-        throw new UnsupportedOperationException();
+        return this.manageHit(receivedAttack);
     }
     
     /**
@@ -179,16 +185,6 @@ public class Player {
         return this.intelligence + this.sumShields();
     }
     
-    /* P3 :)
-    public boolean manageHit(float receivedAttack){
-        
-    }
-    */
-
-    /**
-     *
-     */
-
     
     public void incConsecutiveHits(){
         this.consecutiveHits++;
@@ -217,12 +213,70 @@ public class Player {
         return "Player{" + "name=" + name + ", number=" + number + ", intelligence=" + intelligence + ", strength=" + strength + ", health=" + health + ", row=" + row + ", col=" + col + ", consecutiveHits=" + consecutiveHits + ", weapons=" + weapons + ", shields=" + shields + '}';
     }
     
-    /*
-    Para P3 :)
-    public void receiveReward()
-    @Override
-    public void receiveWeapon(Weapon w)
-    public void receiveShield(Shield s)
-    */ 
+    private boolean manageHit(float recievedAttack){
+        float defensa = this.defensiveEnergy();
+        boolean pierde;
+        
+        if (defensa < recievedAttack){
+            this.gotWounded();
+            this.incConsecutiveHits();
+        }
+        else {
+            this.resetHits();
+        }
+        
+        if (this.consecutiveHits == HITS2LOSE || this.dead()){
+            this.resetHits();
+            pierde = true;
+        }
+        else{
+            pierde = false;
+        }
+        return pierde;
+    }
+    
+    public void receiveReward(){
+        int wReward = dado.weaponsReward();
+        int sReward = dado.shieldsReward();
+        
+        for (int i = 1 ; i<=wReward ; i++){
+            Weapon wnew = this.newWeapon();
+            this.receiveWeapon(wnew);
+        }
+        
+        for (int i = 1 ; i<=sReward ; i++){
+            Shield snew = this.newShield();
+            this.receiveShield(snew);
+        }
+        
+        this.health += dado.healthReward();
+    }
+    
+    public void receiveWeapon(Weapon w){
+        for (Weapon weapon : this.weapons) {
+            if (weapon.discard()){
+                this.weapons.remove(weapon);
+            }
+        }
+        
+        if(this.weapons.size() < MAX_WEAPONS){
+            this.weapons.add(w);
+        }
+    }
+
+    public void receiveShield(Shield s){
+        for (Shield shield : this.shields) {
+            if (shield.discard()){
+                this.shields.remove(shield);
+            }
+        }
+        
+        if(this.shields.size() < MAX_SHIELDS){
+            this.shields.add(s);
+        }
+    }
+
+    
+    
     
 }

@@ -25,32 +25,40 @@ public class TextUI {
         while (!gotInput) {
             char c = readChar();
             switch(c) {
-                case 'w':
+                case 'w' -> {
                     System.out.print(" UP\n");
                     direction = Directions.UP;
                     gotInput = true;
-                    break;
-                case 's':
+                }
+                case 's' -> {
                     System.out.print(" DOWN\n");
                     direction = Directions.DOWN;
                     gotInput = true;
-                    break;
-                case 'd':
+                }
+                case 'd' -> {
                     System.out.print("RIGHT\n");
                     direction = Directions.RIGHT;
                     gotInput = true;
-                    break;
-                case 'a':
+                }
+                case 'a' -> {
                     System.out.print(" LEFT\n");
                     direction = Directions.LEFT;
-                    gotInput = true;    
-                    break;
+                    gotInput = true;
+                }
             }
         }    
         return direction;
     }
     
     public void showGame(GameState gameState) {   
+        
+         System.out.println(gameState.getMonsters());
+         System.out.println(gameState.getPlayers());
+         System.out.println(gameState.getLog());
+         System.out.println("Jugador actual: "+gameState.getCurrentPlayer()+"\n");
+         System.out.println(gameState.getLabyrinth());
+
+        
     }
     
 }

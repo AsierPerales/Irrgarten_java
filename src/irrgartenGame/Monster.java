@@ -16,12 +16,15 @@ public class Monster {
     private float health;
     private int row;
     private int col;
+    
+    private Dice dado;
 
     public Monster(String name, float intelligence, float strength) {
         this.health = INITIAL_HEALTH;
         this.name = name;
         this.intelligence = intelligence;
         this.strength = strength;
+        this.dado = new Dice();
     }
     
     /**
@@ -73,9 +76,17 @@ public class Monster {
      * @return
      */
     public boolean defend(float recievedAttack){
-        // manageHit() ???
-        throw new UnsupportedOperationException();
-    }
+        boolean isDead = this.dead();
+        
+        if (!isDead){
+            float defensiveEnergy = dado.intensity(intelligence);
+            
+            if(defensiveEnergy < recievedAttack){
+                this.gotWounded();
+                isDead = this.dead();
+            }       
+        }
+        return isDead;
     
+    }
 }
-

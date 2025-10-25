@@ -11,10 +11,13 @@ package irrgartenGame;
 public class Shield {
     private float protection;
     private int uses;
+    
+    private Dice dado;
 
     public Shield(float protection, int uses) {
         this.protection = protection;
         this.uses = uses;
+        this.dado = new Dice();
     }
 
     /**
@@ -36,6 +39,14 @@ public class Shield {
             return (this.protection);
         }
         else return (this.uses);
+    }
+    
+     /**
+     *
+     * @return si el escudo de descarta o no segun usos. Delega esto en discardElement de Dice
+     */
+    public boolean discard(){
+        return dado.discardElement(uses);
     }
     
 }

@@ -170,29 +170,92 @@ public class Game {
         log += "Se han producido " + rounds + " de " + max + " rondas de combate.\n";
     }
     
-    /*
+    
     private Directions actualDirection(Directions preferredDirection) {
-        // TODO: Determinar dirección real basada en obstáculos o reglas del laberinto
-        return preferredDirection;
+        Player currentPlayer = players.get(this.currentPlayerIndex);
+        
+        int currentRow = currentPlayer.getRow();
+        int currentCol = currentPlayer.getCol();
+        
+        ArrayList<Directions> valid = labyrinth.validMoves(currentRow,currentCol);
+        
+        return currentPlayer.move(preferredDirection, valid);
     }
-
+    
     private GameCharacter combat(Monster monster) {
-        // TODO: Simular combate entre jugador actual y monstruo
-        return null;
-    }
+        Player jugador = players.get(this.currentPlayerIndex);
+        GameCharacter ganador = GameCharacter.PLAYER;
+        int rounds = 0;
+        
+        boolean pierdeIntercambioDeGolpesEpico = monster.defend(jugador.attack());
+        
+        while(!pierdeIntercambioDeGolpesEpico && rounds < MAX_ROUNDS){
+            ganador = GameCharacter.MONSTER;           
+            rounds++;
+            
+            pierdeIntercambioDeGolpesEpico = jugador.defend(monster.attack());
+            
+            if(!pierdeIntercambioDeGolpesEpico){
+                ganador = GameCharacter.PLAYER;
+                pierdeIntercambioDeGolpesEpico = monster.defend(jugador.attack());
+            }          
+        }
+        this.logRounds(rounds, MAX_ROUNDS);
+        
+        return ganador;
+        /* PORPUESTA DECENTE :)
+        private GameCharacter combat(Monster monster) {
+        Player player = players.get(this.currentPlayerIndex);
+        int rounds = 0;
+        while (rounds < MAX_ROUNDS) {
+            rounds++;
+            // Turno del jugador
+            boolean monsterDefeated = monster.defend(player.attack());
+            if (monsterDefeated) {
+                return GameCharacter.PLAYER;
+            }
+            // Turno del monstruo
+            boolean playerDefeated = player.defend(monster.attack());
+            if (playerDefeated) {
+                return GameCharacter.MONSTER;
+            }
+        }
+        // Si se llega aquí, se acabaron los turnos
+        this.logRounds(rounds, MAX_ROUNDS);
 
-    private void manageReward(GameCharacter winner) {
-        // TODO: Aplicar recompensa al ganador del combate
-    }
+        return GameCharacter.PLAYER; 
+        }
 
+        */
+    }
+    
     private void manageResurrection() {
-        // TODO: Comprobar si el jugador debe resucitar
+        if (dado.resurrectPlayer()){
+            players.get(this.currentPlayerIndex).resurrect();
+            this.logResurrected();
+        }
+        else{
+            this.logPlayerSkipTurn();
+        }
+        
+    }
+    
+    private void manageReward(GameCharacter winner) {
+        if (winner == GameCharacter.PLAYER){
+            players.get(this.currentPlayerIndex).receiveReward();
+            this.logPlayerWon();
+        }
+        else{
+            this.logMonsterWon();
+        }
     }
 
-    public boolean nextStep(Directions preferredDirection) {
-        // TODO: Implementar lógica principal de movimiento y combate del jugador
-        return false;
-    }
-    */
+    
+
+//    public boolean nextStep(Directions preferredDirection) {
+//        // TODO: Implementar lógica principal de movimiento y combate del jugador
+//        return false;
+//    }
+    
     
 }

@@ -12,6 +12,8 @@ public class Weapon {
     private float power;
     private int uses;
     
+    private Dice dado;
+    
     /**
      *
      * @param power
@@ -20,6 +22,7 @@ public class Weapon {
     public Weapon(float power, int uses){
         this.power = power;
         this.uses = uses;
+        this.dado = new Dice();
         
     }
     
@@ -42,5 +45,13 @@ public class Weapon {
     @Override
     public String toString(){
         return ("W[" + power + ", " + uses + "]");
+    }
+    
+    /**
+     *
+     * @return si el arma de descarta o no segun usos. Delega esto en discardElement de Dice
+     */
+    public boolean discard(){
+        return dado.discardElement(uses);
     }
 }

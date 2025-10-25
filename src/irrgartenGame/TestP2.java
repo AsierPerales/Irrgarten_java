@@ -9,6 +9,7 @@ package irrgartenGame;
  * @author asier
  */
 public class TestP2 {
+    /*
     public static void main(String[] args) {
         // Probando las clases Player, Monster, Labyrinth y Game
         
@@ -68,4 +69,5 @@ public class TestP2 {
         GameState gamestate = juego.getGameState();
         //System.out.println(gamestate.getLog());
     }
+*/
 }

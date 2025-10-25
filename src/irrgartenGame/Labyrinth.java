@@ -4,6 +4,7 @@
  */
 package irrgartenGame;
 
+import java.util.ArrayList;
 
 /**
  *
@@ -230,9 +231,27 @@ public class Labyrinth {
     spreadPlayers(ArrayList<Player> players){}
     Monster putPlayer(Directions direction, Player player){}
     void addBlock(Orientation orientation, int startRow, int startCol, int length){}
-    ArrayList<Directions> validMoves(int row, int col){}
     Monster putPlayer2D{}
     */
     
+    ArrayList<Directions> validMoves(int row, int col){
+        ArrayList<Directions> validMoves = new ArrayList<>();
+        
+        if (canStepOn(row+1,col)){
+            validMoves.add(Directions.DOWN);
+        }
+        if (canStepOn(row-1,col)){
+            validMoves.add(Directions.UP);
+        }
+        if (canStepOn(row,col+1)){
+            validMoves.add(Directions.RIGHT);
+        }
+        if (canStepOn(row,col-1)){
+            validMoves.add(Directions.LEFT);
+        }
+        
+        return validMoves;
+    }
+
     
 }

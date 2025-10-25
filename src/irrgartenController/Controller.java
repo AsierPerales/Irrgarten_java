@@ -14,7 +14,7 @@ public class Controller {
         this.game = game;
         this.view = view;
     }
-    
+    /*
     public void play() {
         boolean endOfGame = false;
         while (!endOfGame) {
@@ -24,5 +24,5 @@ public class Controller {
         }
       view.showGame(game.getGameState());        
     }
-    
+   */ 
 }
