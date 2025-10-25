@@ -50,7 +50,7 @@ public class Game {
             );
             players.add(jugador);
         }
-        // configureLabyrinth();
+        configureLabyrinth();
     }
 
     /**
@@ -88,7 +88,7 @@ public class Game {
      * distribuye los jugadores dentro del laberinto.
      * 
      */
-    public void configureLabyrinth() {
+    private void configureLabyrinth() {
         
         int cont = 0;
         int porcentaje = 10;
