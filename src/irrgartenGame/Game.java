@@ -89,14 +89,14 @@ public class Game {
      * 
      */
     public void configureLabyrinth() {
-        /*
+        
         int cont = 0;
-
+        int porcentaje = 10;
         labyrinth.addBlock(Orientation.HORIZONTAL, 0, 0, 3);
                    
         for (int i = 0; i < labyrinth.getnRows(); i++) {
             for (int j = 0; j < labyrinth.getnCols(); j++) {
-                if ((dado.randomPos(100) <= this.porcentaje) && labyrinth.emptyPos(i, j)) {
+                if ((dado.randomPos(100) <= porcentaje) && labyrinth.emptyPos(i, j)) {
                     String nombre = "Monster" + (char) ('0' + i);
                     Monster m = new Monster(nombre, dado.randomIntelligence(), dado.randomStrength());
                     cont++;
@@ -107,7 +107,7 @@ public class Game {
             }                        
         }              
         labyrinth.spreadPlayers(players);
-        */
+        
     }
 
     /**
@@ -252,10 +252,35 @@ public class Game {
 
     
 
-//    public boolean nextStep(Directions preferredDirection) {
-//        // TODO: Implementar lógica principal de movimiento y combate del jugador
-//        return false;
-//    }
+    public boolean nextStep(Directions preferredDirection) {
+        this.log = "";
+        Player jugador = this.players.get(this.currentPlayerIndex);
+        
+        if(jugador.dead()){
+            this.manageResurrection();
+        }
+        else{
+            Directions direction = this.actualDirection(preferredDirection);
+            if(direction != preferredDirection){
+               this.logPlayerNoOrders();
+            }
+            Monster monstruo = this.labyrinth.putPlayer(direction, jugador);
+            
+            if (monstruo == null){
+                this.logNoMonster();
+            }
+            else{
+                GameCharacter winner = this.combat(monstruo);
+                this.manageReward(winner);
+            }
+        }
+        if(this.finished()){
+            return true;
+        }
+        this.nextPlayer();
+        return false;
+    }
+    
     
     
 }

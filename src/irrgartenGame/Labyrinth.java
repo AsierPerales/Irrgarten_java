@@ -62,6 +62,24 @@ public class Labyrinth {
     }
 
     /**
+     *
+     * @return nRows
+     */
+    public int getnRows() {
+        return nRows;
+    }
+
+    /**
+     *
+     * @return nCols
+     */
+    public int getnCols() {
+        return nCols;
+    }
+    
+    
+
+    /**
      * Comprueba si hay un jugador en la posición de salida, 
      * lo que significa que existe un ganador.
      *
@@ -227,14 +245,7 @@ public class Labyrinth {
         return new int[]{randomRow, randomCol};
     }
     
-    /*
-    spreadPlayers(ArrayList<Player> players){}
-    Monster putPlayer(Directions direction, Player player){}
-    void addBlock(Orientation orientation, int startRow, int startCol, int length){}
-    Monster putPlayer2D{}
-    */
-    
-    ArrayList<Directions> validMoves(int row, int col){
+    public ArrayList<Directions> validMoves(int row, int col){
         ArrayList<Directions> validMoves = new ArrayList<>();
         
         if (canStepOn(row+1,col)){
@@ -252,6 +263,76 @@ public class Labyrinth {
         
         return validMoves;
     }
-
+    
+    /**
+     *
+     * @param direction
+     * @param player
+     * @return
+     */
+    public Monster putPlayer(Directions direction, Player player){
+        int oldRow = player.getRow();
+        int oldCol = player.getCol();
+        
+        int[] newPos = this.dir2Pos(oldRow, oldCol, direction);
+        Monster monster = this.putPlayer2D(oldRow, oldCol, newPos[0], newPos[1], player);
+        
+        return monster;
+    }
+    
+    public Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
+        Monster monster = null;
+        
+        if(this.canStepOn(row,col)){
+           if(this.posOK(oldRow, oldCol)){
+               Player p = this.players[oldRow][oldCol];
+               if(p.equals(player)){
+                   this.updateOldPos(oldRow, oldCol);
+                   players[oldRow][oldCol] = null;
+               }
+           }
+           boolean monsterPos = this.monsterPos(row, col);
+           
+           if(monsterPos){
+               labyrinth[row][col] = COMBAT_CHAR;
+               monster = this.monsters[row][col];
+           }
+           else{
+               labyrinth[row][col] = player.getNumber();
+           }
+           players[row][col] = player;
+           player.setPos(row, col);
+        }
+        return monster;
+    }
+    
+    void addBlock(Orientation orientation, int startRow, int startCol, int length){
+        int incRow = 0;
+        int incCol = 0;
+        if(orientation == Orientation.VERTICAL){
+            incRow = 1;
+            incCol = 0;
+        }
+        else{
+            incRow = 0;
+            incCol = 1;
+        }
+        int row = startRow;
+        int col = startCol;
+        
+        while(posOK(row,col) && emptyPos(row,col) && length > 0 ){
+            labyrinth[row][col] = BLOCK_CHAR;
+            length--;
+            row+=incRow;
+            col+=incCol;
+        }
+    }
+    
+    void spreadPlayers(ArrayList<Player> players){
+        for(Player p : players){
+            int[] pos = this.randomEmptyPos();
+            this.putPlayer2D(-1, -1, pos[0], pos[1], p);
+        }
+    }
     
 }
