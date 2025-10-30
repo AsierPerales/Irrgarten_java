@@ -14,10 +14,16 @@ import irrgartenTextUI.TextUI;
  */
 public class main {
     public static void main(String[] args){
+       
+      // Inicializamos vista  y controlador
       TextUI vista  = new TextUI();                        
       Controller controlador;
+      
+      // Inicializamos modelo
       Game juego;
       juego = new Game(2);
+      
+      // Llamamos a play
       controlador = new Controller(juego,vista);
       controlador.play();    
         

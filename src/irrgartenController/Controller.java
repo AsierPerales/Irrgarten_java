@@ -22,7 +22,10 @@ public class Controller {
             Directions direction = view.nextMove(); 
             endOfGame = game.nextStep(direction);
         }
-      view.showGame(game.getGameState());        
+      view.showGame(game.getGameState());   
+      System.out.print("¡¡¡¡¡FIN DEL JUEGO !!!!!\n");
+      System.out.print("Ganador: " + game.getGameState().getCurrentPlayer() + "\n");
+
     }
    
 }

@@ -4,6 +4,8 @@
  */
 package irrgartenGame;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author asier
@@ -12,8 +14,8 @@ public class GameState {
 
     // Atributos de instancia privados
     private String labyrinth;
-    private String players;
-    private String monsters;
+    private ArrayList<Player> players;
+    private ArrayList<Monster> monsters;
     private int currentPlayer;
     private boolean winner;
     private String log;
@@ -29,7 +31,7 @@ public class GameState {
      * @param winner        indica si ya existe un ganador
      * @param log           registro de eventos recientes
      */
-    public GameState(String labyrinth, String players, String monsters,
+    public GameState(String labyrinth, ArrayList<Player> players, ArrayList<Monster> monsters,
                      int currentPlayer, boolean winner, String log) {
         this.labyrinth = labyrinth;
         this.players = players;
@@ -41,7 +43,7 @@ public class GameState {
 
     /**
      *
-     * @return 
+     * @return instancia del laberinto (en forma de String) contenido en GameState
      */
     public String getLabyrinth() {
         return labyrinth;
@@ -49,23 +51,35 @@ public class GameState {
 
     /**
      *
-     * @return
+     * Convierto el ArrayList de jugadores en String para que quede mas bonito :)
+     * 
+     * @return String que representa los jugadores en la partida
      */
     public String getPlayers() {
-        return players;
+        StringBuilder sb = new StringBuilder();
+        for (Player p : players) {
+            sb.append(p.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     /**
      *
-     * @return
+     * Convierto el ArrayList de monstruos en String para que quede mas bonito :)
+     * 
+     * @return String que representa los monstruos en la partida
      */
     public String getMonsters() {
-        return monsters;
+        StringBuilder sb = new StringBuilder();
+        for (Monster m : monsters) {
+            sb.append(m.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     /**
      *
-     * @return
+     * @return Numero del jugador actual 
      */
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -73,7 +87,7 @@ public class GameState {
 
     /**
      *
-     * @return
+     * @return Variable booleana que dice si hay un ganador o no
      */
     public boolean isWinner() {
         return winner;
@@ -81,7 +95,7 @@ public class GameState {
 
     /**
      *
-     * @return
+     * @return Registro de los eventos del juego en formato String
      */
     public String getLog() {
         return log;

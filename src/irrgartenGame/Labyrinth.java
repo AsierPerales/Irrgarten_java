@@ -275,29 +275,32 @@ public class Labyrinth {
         int oldCol = player.getCol();
         
         int[] newPos = this.dir2Pos(oldRow, oldCol, direction);
-        Monster monster = this.putPlayer2D(oldRow, oldCol, newPos[0], newPos[1], player);
-        
-        return monster;
+        return this.putPlayer2D(oldRow, oldCol, newPos[0], newPos[1], player);
     }
     
     public Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
         Monster monster = null;
         
         if(this.canStepOn(row,col)){
+            
            if(this.posOK(oldRow, oldCol)){
+               
                Player p = this.players[oldRow][oldCol];
+               
                if(p.equals(player)){
+                   
                    this.updateOldPos(oldRow, oldCol);
-                   players[oldRow][oldCol] = null;
+                   players[oldRow][oldCol] = null;              
                }
            }
-           boolean monsterPos = this.monsterPos(row, col);
            
-           if(monsterPos){
+           if(this.monsterPos(row, col)){
+               
                labyrinth[row][col] = COMBAT_CHAR;
-               monster = this.monsters[row][col];
+               monster = this.monsters[row][col];          
            }
            else{
+               
                labyrinth[row][col] = player.getNumber();
            }
            players[row][col] = player;
@@ -307,8 +310,9 @@ public class Labyrinth {
     }
     
     void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        int incRow = 0;
-        int incCol = 0;
+        int incRow;
+        int incCol;
+        
         if(orientation == Orientation.VERTICAL){
             incRow = 1;
             incCol = 0;
@@ -317,6 +321,7 @@ public class Labyrinth {
             incRow = 0;
             incCol = 1;
         }
+        
         int row = startRow;
         int col = startCol;
         

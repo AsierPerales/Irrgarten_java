@@ -19,11 +19,6 @@ public class Game {
 
     Dice dado = new Dice();
 
-    // P3 :)
-    //    private int  currentRound;
-    //    private int nplayers;
-    //    private static int ROWCOL = 10;
-    //    private static int porcentaje=10;
     
     /**
      * Constructor de la clase Game. 
@@ -34,17 +29,15 @@ public class Game {
      *                 Debe ser mayor que 0.
      */
     public Game(int nplayers) {
-        // this.nplayers = nplayers;
         players = new ArrayList<>();
         monsters = new ArrayList<>();
-        // currentRound = 0;
         log = "";
         labyrinth = new Labyrinth(6, 10, dado.randomPos(6), dado.randomPos(10));
 
         currentPlayerIndex = 0;
         for (int i = 0; i < nplayers; i++) {
             Player jugador = new Player(
-                (char) ('0' + i + 1),
+                (char) ('0' + i),
                 dado.randomIntelligence(),
                 dado.randomStrength()
             );
@@ -74,8 +67,8 @@ public class Game {
     public GameState getGameState() {
         return new GameState(
             labyrinth.toString(),
-            players.toString(),
-            monsters.toString(),
+            players,
+            monsters,
             currentPlayerIndex,
             this.finished(),
             log
@@ -89,23 +82,26 @@ public class Game {
      * 
      */
     private void configureLabyrinth() {
-        
-        int cont = 0;
-        int porcentaje = 10;
+                
+        // Añadir bloques ...
         labyrinth.addBlock(Orientation.HORIZONTAL, 0, 0, 3);
+        labyrinth.addBlock(Orientation.VERTICAL, 0, 5, 4);
                    
-        for (int i = 0; i < labyrinth.getnRows(); i++) {
-            for (int j = 0; j < labyrinth.getnCols(); j++) {
-                if ((dado.randomPos(100) <= porcentaje) && labyrinth.emptyPos(i, j)) {
-                    String nombre = "Monster" + (char) ('0' + i);
-                    Monster m = new Monster(nombre, dado.randomIntelligence(), dado.randomStrength());
-                    cont++;
-                    m.setPos(i, j);
-                    labyrinth.addMonster(i, j, m);
-                    monsters.add(m);
-                }
-            }                        
-        }              
+        // Añadir monstruos ...
+        int numMonstruos = 5;  
+
+        for (int k = 0; k < numMonstruos; k++) {
+            int[] pos = labyrinth.randomEmptyPos();  
+            int i = pos[0];
+            int j = pos[1];
+
+            String nombre = "Monster" + k;
+            Monster m = new Monster(nombre, dado.randomIntelligence(), dado.randomStrength());
+            m.setPos(i, j);
+            labyrinth.addMonster(i, j, m);
+            monsters.add(m);
+        }
+        
         labyrinth.spreadPlayers(players);
         
     }
@@ -170,7 +166,16 @@ public class Game {
         log += "Se han producido " + rounds + " de " + max + " rondas de combate.\n";
     }
     
-    
+    /**
+    * Determina la dirección real en la que se moverá el jugador actual.
+    * 
+    * A partir de una dirección preferida, se obtienen los movimientos válidos
+    * desde la posición actual del jugador en el laberinto, y luego se decide
+    * la dirección final basándose en esas opciones.
+    *
+    * @param preferredDirection la dirección que el jugador intenta tomar inicialmente
+    * @return la dirección efectiva en la que el jugador se moverá
+    */
     private Directions actualDirection(Directions preferredDirection) {
         Player currentPlayer = players.get(this.currentPlayerIndex);
         
@@ -182,6 +187,16 @@ public class Game {
         return currentPlayer.move(preferredDirection, valid);
     }
     
+    /**
+    * Ejecuta un combate entre el jugador actual y un monstruo.
+    * <p>
+    * El combate se desarrolla por rondas alternadas de ataque y defensa entre el jugador
+    * y el monstruo, hasta que uno de los dos es derrotado o se alcanza el número máximo
+    * de rondas permitidas. El método determina y devuelve el ganador del enfrentamiento.
+    *
+    * @param monster el monstruo con el que combate el jugador actual
+    * @return el personaje que gana el combate ( {GameCharacter.PLAYER} o {GameCharacter.MONSTER})
+    */
     private GameCharacter combat(Monster monster) {
         Player jugador = players.get(this.currentPlayerIndex);
         GameCharacter ganador = GameCharacter.PLAYER;
@@ -229,6 +244,12 @@ public class Game {
         */
     }
     
+    /**
+    * Gestiona la posible resurrección del jugador actual tras haber sido derrotado.
+    * 
+    * Si el dado determina que el jugador puede resucitar, este es revivido y se registra en log.
+    * En caso contrario, el jugador pierde su turno y también se deja constancia en el log.
+    */
     private void manageResurrection() {
         if (dado.resurrectPlayer()){
             players.get(this.currentPlayerIndex).resurrect();
@@ -240,6 +261,14 @@ public class Game {
         
     }
     
+    /**
+    * Gestiona la recompensa tras un combate en función del ganador.
+    * 
+    * Si el jugador resulta vencedor, recibe su recompensa y se registra en log.
+    * En caso contrario, se registra la victoria del monstruo.
+    *
+    * @param winner el personaje que ganó el combate ({GameCharacter.PLAYER} o {GameCharacter.MONSTER})
+    */
     private void manageReward(GameCharacter winner) {
         if (winner == GameCharacter.PLAYER){
             players.get(this.currentPlayerIndex).receiveReward();
@@ -252,6 +281,23 @@ public class Game {
 
     
 
+    /**
+    * Ejecuta el siguiente paso del turno del jugador actual en el juego.
+    * 
+    * Si el jugador está muerto, se gestiona su posible resurrección.  
+    * 
+    * En caso contrario, intenta moverse en la dirección preferida y se determina
+    * la dirección real posible según las reglas del laberinto.  
+    * 
+    * Si hay un monstruo en la nueva posición, se inicia un combate y se gestionan
+    * las recompensas según el ganador.  
+    * 
+    * Finalmente, se verifica si la partida ha finalizado; de lo contrario, se pasa
+    * el turno al siguiente jugador.
+    *
+    * @param preferredDirection la dirección en la que el jugador desea moverse
+    * @return {true} si el juego ha finalizado, {false} en caso contrario
+    */
     public boolean nextStep(Directions preferredDirection) {
         this.log = "";
         Player jugador = this.players.get(this.currentPlayerIndex);

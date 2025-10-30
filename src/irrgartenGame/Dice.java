@@ -60,12 +60,9 @@ public class Dice {
     * @return inteligencia aleatoria
     */
    public float randomIntelligence() {
-       return generator.nextFloat(MAX_INTELLIGENCE);
+       float inteligencia = generator.nextFloat(MAX_INTELLIGENCE);   
+       return Math.round(inteligencia * 100.0f) / 100.0f; // redondea a 2 decimales
    }
-// TEMA REDONDEO Y ESO ???
-//    float value = generator.nextFloat(MAX_INTELLIGENCE);
-//    return Math.round(value * 10.0f) / 10.0f;   // redondea a 1 decimal
-//    return Math.round(value * 100.0f) / 100.0f; // redondea a 2 decimales
    
    /**
     * Genera un valor aleatorio de fuerza en el intervalo [0, MAX_STRENGTH).
@@ -73,7 +70,8 @@ public class Dice {
     * @return fuerza aleatoria
     */
    public float randomStrength() {
-       return generator.nextFloat(MAX_STRENGTH);
+       float fuerza = generator.nextFloat(MAX_STRENGTH);   
+       return Math.round(fuerza * 100.0f) / 100.0f; // redondea a 2 decimales
    }
 
    /**
