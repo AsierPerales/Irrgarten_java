@@ -8,16 +8,15 @@ package irrgartenGame;
  *
  * @author asier
  */
-public class Shield {
-    private float protection;
-    private int uses;
+public class Shield extends CombatElement {
     
-    private Dice dado;
-
+    
+    /*
+     * Delega en el constructor de CombatElement
+     */
     public Shield(float protection, int uses) {
-        this.protection = protection;
-        this.uses = uses;
-        this.dado = new Dice();
+        super(protection, uses);        
+
     }
 
     /**
@@ -26,7 +25,7 @@ public class Shield {
      */
     @Override
     public String toString() {
-        return "S[" + protection + ", " + uses + ']';
+        return "S[" + this.geteffect() + ", " + this.getuses() + ']';
     }
     
     /**
@@ -34,19 +33,18 @@ public class Shield {
      * @return si usos > 0 devuelve @protection, si no devuelve @uses (0) 
      */
     public float protect(){
-        if (this.uses > 0){
-            uses --;
-            return (this.protection);
-        }
-        else return (this.uses);
+        return this.produceEffect();
     }
     
-     /**
+     /** YA IMPLEMENTADO EN COMBATELEMENT!! QUE GUAY !!!!!
      *
      * @return si el escudo de descarta o no segun usos. Delega esto en discardElement de Dice
      */
+    
+    /*
     public boolean discard(){
         return dado.discardElement(uses);
     }
+    */
     
 }
