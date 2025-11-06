@@ -16,18 +16,11 @@ package irrgartenGame;
  * Los monstruos pueden atacar, defenderse, recibir daño y ser derrotados.
  */
 
-public class Monster {
+public class Monster extends LabyrinthCharacter{
     
     /** Salud inicial de todos los monstruos. */
     private static final int INITIAL_HEALTH = 5;
     
-    private String name;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
-    private Dice dado;
 
     /**
      * Crea un nuevo monstruo con los atributos especificados.
@@ -37,60 +30,23 @@ public class Monster {
      * @param strength la fuerza del monstruo, usada en ataques
      */
     public Monster(String name, float intelligence, float strength) {
-        this.health = INITIAL_HEALTH;
-        this.name = name;
-        this.intelligence = intelligence;
-        this.strength = strength;
-        this.dado = new Dice();
+        
+        super(name, intelligence, strength, INITIAL_HEALTH);
+        
     }
     
-    /**
-     * Indica si el monstruo ha muerto.
-     *
-     * @return {true} si la salud del monstruo es menor o igual a cero, {false} en caso contrario
-     */
-    public boolean dead() {
-        return (this.health <= 0);
-    }
     
     /**
      * Realiza un ataque calculando su intensidad en función de la fuerza del monstruo.
      *
      * @return el valor del ataque generado
      */
+    @Override
     public float attack() {
         Dice dado = new Dice();
-        return dado.intensity(this.strength); 
+        return dado.intensity(this.getStrength()); 
     }
     
-    /**
-     * Establece la posición del monstruo dentro del laberinto.
-     *
-     * @param row la fila donde se encuentra el monstruo
-     * @param col la columna donde se encuentra el monstruo
-     */
-    public void setPos(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    /**
-     * Devuelve una representación en texto del monstruo, mostrando sus atributos principales.
-     *
-     * @return una cadena con la información del monstruo
-     */
-    @Override
-    public String toString() {
-        return "M{" + "name=" + name + ", intelligence=" + intelligence + ", strength=" + strength +
-               ", health=" + health + ", row=" + row + ", col=" + col + '}';
-    }
-    
-    /**
-     * Reduce la salud del monstruo en una unidad tras recibir daño.
-     */
-    public void gotWounded() {
-        this.health--;
-    }
     
     /**
      * Permite al monstruo defenderse de un ataque recibido.
@@ -101,15 +57,28 @@ public class Monster {
      * @param recievedAttack la intensidad del ataque recibido
      * @return {true} si el monstruo muere tras el ataque, {false} en caso contrario
      */
+    @Override
     public boolean defend(float recievedAttack) {
+        Dice dado = new Dice();
         
         if (!this.dead()) {
-            float defensiveEnergy = dado.intensity(intelligence);
+            float defensiveEnergy = dado.intensity(this.getIntelligence());
             
             if (defensiveEnergy < recievedAttack) {
                 this.gotWounded();
             }       
         }
         return this.dead();
+    }
+    
+    /**
+     * Devuelve una representación en texto del monstruo, mostrando sus atributos principales.
+     *
+     * @return una cadena con la información del monstruo
+     */
+    @Override
+    public String toString() {
+        return "M{" + "name=" + this.getName()+ ", intelligence=" + this.getIntelligence() + ", strength=" + this.getStrength() +
+               ", health=" + this.getHealth() + ", row=" + this.getRow() + ", col=" + this.getCol() + '}';
     }
 }
