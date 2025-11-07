@@ -5,6 +5,7 @@
 package irrgartenGame;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
@@ -163,5 +164,28 @@ public class Dice {
    public boolean discardElement(int usesLeft){
     float probabilidad_Discard = (float) usesLeft / MAX_USES;
     return generator.nextFloat(0, 1) > probabilidad_Discard;
+   }
+   
+    /**
+     *
+     * Calcula la probabilidad de obtener la direccion preferente en base a la inteligencia de quien
+     * llama al metodo (FuzzyPlayer). En caso de que no se obtenga la preferente, devuelve al azar una de
+     * las direcciones validas
+     * 
+     * @param preferred direccion preferente
+     * @param validMoves direcciones validas
+     * @param intelligence inteligencia del jugador que llama al metodo
+     * @return direccion de movimiento preferente || adireccion valida al azar
+     */
+    public Directions nextStep(Directions preferred, ArrayList<Directions> validMoves, float intelligence){
+       float probabilidad = intelligence/MAX_INTELLIGENCE;
+       
+       if (generator.nextFloat() < probabilidad && validMoves.contains(preferred)){
+           return preferred;
+       }
+       
+       int index = generator.nextInt(validMoves.size());
+       
+       return validMoves.get(index);
    }
 }
