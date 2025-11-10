@@ -247,12 +247,15 @@ public class Game {
     /**
     * Gestiona la posible resurrección del jugador actual tras haber sido derrotado.
     * 
-    * Si el dado determina que el jugador puede resucitar, este es revivido y se registra en log.
+    * Si el dado determina que el jugador puede resucitar, este es revivido, convertido en FuzzyPlayer 
+    * y se registra en log.
     * En caso contrario, el jugador pierde su turno y también se deja constancia en el log.
     */
     private void manageResurrection() {
         if (dado.resurrectPlayer()){
             players.get(this.currentPlayerIndex).resurrect();
+            FuzzyPlayer nuevoFuzzy = new FuzzyPlayer(this.players.get(currentPlayerIndex));
+            players.set(this.currentPlayerIndex, nuevoFuzzy );
             this.logResurrected();
         }
         else{

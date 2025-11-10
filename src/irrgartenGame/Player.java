@@ -80,6 +80,7 @@ public class Player extends LabyrinthCharacter{
      * El jugador recupera su salud inicial y pierde todas sus armas y escudos.
      */
     public void resurrect() {
+        
         this.weapons.clear();
         this.shields.clear();
         this.setHealth(INITIAL_HEALTH);
@@ -91,6 +92,20 @@ public class Player extends LabyrinthCharacter{
     public char getNumber() {
         return this.number;
     }
+
+    public int getConsecutiveHits() {
+        return consecutiveHits;
+    }
+
+    public ArrayList<Shield> getShields() {
+        return shields;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+    
+    
     
     
 
@@ -298,6 +313,8 @@ public class Player extends LabyrinthCharacter{
             this.shields.add(s);
         }
     }
+    
+    
 
 }
 
