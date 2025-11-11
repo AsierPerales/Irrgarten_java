@@ -8,6 +8,23 @@ package irrgartenGame;
  *
  * @author asier
  */
-public class ShieldCardDeck {
+public class ShieldCardDeck extends CardDeck<Shield> {
+    
+    /**
+     *
+     */
+    
+    @Override
+    protected void addCards(){
+        
+       for(int i = 0; i<5; i++){
+            
+            Shield escudo = new Shield(dado.shieldPower(), dado.usesLeft());
+            addCard(escudo);
+        }
+        
+        
+    }   
+    
     
 }

@@ -8,6 +8,22 @@ package irrgartenGame;
  *
  * @author asier
  */
-public class WeaponCardDeck {
+public class WeaponCardDeck extends CardDeck<Weapon> {
+    
+    /**
+     *
+     */
+    
+    @Override
+    protected void addCards(){
+        
+       for(int i = 0; i<5; i++){
+            
+            Weapon arma = new Weapon(dado.weaponPower(), dado.usesLeft());
+            addCard(arma);
+        }
+        
+    }   
+    
     
 }

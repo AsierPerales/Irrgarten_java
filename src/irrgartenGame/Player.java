@@ -31,8 +31,11 @@ public class Player extends LabyrinthCharacter{
     private char number;
     private int consecutiveHits = 0;
     
-    private ArrayList<Weapon> weapons;
-    private ArrayList<Shield> shields;
+    private WeaponCardDeck weaponCardDeck;
+    private ShieldCardDeck shieldCardDeck;
+    
+    private ArrayList<Weapon> armas;
+    private ArrayList<Shield> escudos;
     
     private Dice dado;
 
@@ -48,8 +51,13 @@ public class Player extends LabyrinthCharacter{
         super("Player#"+number, intelligence, strength, INITIAL_HEALTH);
         
         this.number = number;
-        this.weapons = new ArrayList<>();
-        this.shields = new ArrayList<>();
+        
+        this.weaponCardDeck = new WeaponCardDeck();
+        this.shieldCardDeck = new ShieldCardDeck();
+        
+        this.armas = new ArrayList<>();
+        this.escudos = new ArrayList<>();
+        
         this.dado = new Dice();
     }
     
@@ -60,17 +68,17 @@ public class Player extends LabyrinthCharacter{
         this.number = other.number;
         this.consecutiveHits = other.consecutiveHits;
      
-        this.weapons = new ArrayList<>();
-        for (Weapon weapon : other.weapons) {
+        this.armas = new ArrayList<>();
+        for (Weapon weapon : other.armas) {
             Weapon copiedWeapon = new Weapon(weapon.geteffect(), weapon.getuses());
-            this.weapons.add(copiedWeapon);
+            this.armas.add(copiedWeapon);
         }
 
   
-        this.shields = new ArrayList<>();
-        for (Shield shield : other.shields) {
+        this.escudos = new ArrayList<>();
+        for (Shield shield : other.escudos) {
             Shield copiedShield = new Shield(shield.geteffect(), shield.getuses());
-            this.shields.add(copiedShield);
+            this.escudos.add(copiedShield);
         }
     }
     
@@ -81,8 +89,8 @@ public class Player extends LabyrinthCharacter{
      */
     public void resurrect() {
         
-        this.weapons.clear();
-        this.shields.clear();
+        this.armas.clear();
+        this.escudos.clear();
         this.setHealth(INITIAL_HEALTH);
         this.resetHits();
     }
@@ -98,11 +106,11 @@ public class Player extends LabyrinthCharacter{
     }
 
     public ArrayList<Shield> getShields() {
-        return shields;
+        return escudos;
     }
 
     public ArrayList<Weapon> getWeapons() {
-        return weapons;
+        return armas;
     }
     
     
@@ -127,23 +135,26 @@ public class Player extends LabyrinthCharacter{
     
     /**
      * Crea una nueva arma generada aleatoriamente con valores definidos por el dado.
-     *
+     * Obsoleto gracias a WeaponCardDeck :)
      * @return un nuevo objeto {Weapon}
      */
+    /*
     private Weapon newWeapon() {
         Dice dadoArma = new Dice();
         return new Weapon(dadoArma.weaponPower(), dadoArma.usesLeft());
     }
-    
+    */
     /**
      * Crea un nuevo escudo generado aleatoriamente con valores definidos por el dado.
-     *
+     * Obsoleto gracias a ShieldCardDeck
      * @return un nuevo objeto {Shield}
      */
+    /*
     private Shield newShield() {
         Dice dadoEscudo = new Dice();
         return new Shield(dadoEscudo.shieldPower(), dadoEscudo.usesLeft());
     }
+    */
     
     /**
      * Calcula la suma del poder de ataque total de las armas equipadas.
@@ -152,7 +163,7 @@ public class Player extends LabyrinthCharacter{
      */
     protected float sumWeapons() {
         float suma = 0;
-        for (Weapon w : weapons) {
+        for (Weapon w : armas) {
             suma += w.attack();
         }
         return suma;
@@ -165,7 +176,7 @@ public class Player extends LabyrinthCharacter{
      */
     protected float sumShields() {
         float suma = 0;
-        for (Shield s : shields) {
+        for (Shield s : escudos) {
             suma += s.protect();
         }
         return suma;
@@ -222,7 +233,7 @@ public class Player extends LabyrinthCharacter{
     public String toString() {
         return "Player{" + "name=Player#" + this.getNumber() + ", intelligence=" + this.getIntelligence() +
                ", strength=" + this.getStrength() + ", health=" + this.getHealth() + ", row=" + this.getRow() + ", col=" + this.getCol() +
-               ", consecutiveHits=" + consecutiveHits + ", weapons=" + weapons + ", shields=" + shields + '}';
+               ", consecutiveHits=" + consecutiveHits + ", weapons=" + armas + ", shields=" + escudos + '}';
     }
 
     /**
@@ -256,20 +267,14 @@ public class Player extends LabyrinthCharacter{
      * 
      * Puede recibir nuevas armas, escudos y una mejora de salud.
      */
-    public void receiveReward() {
-        int wReward = dado.weaponsReward();
-        int sReward = dado.shieldsReward();
+    public void receiveReward() {        
         
-        //System.out.println("Recibiste "+ wReward + " y " + sReward);
-        
-        for (int i = 0; i < wReward; i++) {
-            Weapon wnew = this.newWeapon();
-            this.receiveWeapon(wnew);
+        for (int i = 0; i < dado.weaponsReward(); i++) {
+            this.receiveWeapon(weaponCardDeck.nextCard());
         }
         
-        for (int i = 0; i < sReward; i++) {
-            Shield snew = this.newShield();
-            this.receiveShield(snew);
+        for (int i = 0; i < dado.shieldsReward(); i++) {
+            this.receiveShield(shieldCardDeck.nextCard());
         }
         
         int extraHealth = dado.healthReward();
@@ -289,11 +294,11 @@ public class Player extends LabyrinthCharacter{
         //Podria haber usado un iterador, pero encontre en StackOverflow
         //esto y me parecia mas elegante :)
         
-        this.weapons.removeIf(Weapon::discard);
+        this.armas.removeIf(Weapon::discard);
 
         // Añade la nueva arma si hay espacio disponible
-        if (this.weapons.size() < MAX_WEAPONS) {
-            this.weapons.add(w);
+        if (this.armas.size() < MAX_WEAPONS) {
+            this.armas.add(w);
         }
     }
 
@@ -307,10 +312,10 @@ public class Player extends LabyrinthCharacter{
      */
     private void receiveShield(Shield s) {
         
-        this.shields.removeIf(Shield::discard);
+        this.escudos.removeIf(Shield::discard);
 
-        if (this.shields.size() < MAX_SHIELDS) {
-            this.shields.add(s);
+        if (this.escudos.size() < MAX_SHIELDS) {
+            this.escudos.add(s);
         }
     }
     
