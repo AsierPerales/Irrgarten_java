@@ -10,6 +10,11 @@
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/FuzzyPlayer.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgarten/main.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Dice.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/CardDeck.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/ShieldCardDeck.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/CombatElement.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/WeaponCardDeck.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Weapon.java</file>
         </group>
     </open-files>
 </project-private>

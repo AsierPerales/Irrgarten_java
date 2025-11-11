@@ -57,4 +57,11 @@ public abstract class CardDeck<T> {
         
         
     }
+
+    @Override
+    public String toString() {
+        return "CardDeck{" + "cardDeck=" + cardDeck + '}';
+    }
+    
+    
 }

@@ -17,6 +17,7 @@ import irrgartenTextUI.TextUI;
  * @author asier
  */
 public class main {
+    /*
     public static void main(String[] args){
        
       // Inicializamos vista  y controlador
@@ -32,4 +33,5 @@ public class main {
       controlador.play();    
         
     }
+*/
 }
