@@ -14,7 +14,7 @@ import java.util.Collections;
 public abstract class CardDeck<T> {
     
     private ArrayList<T> cardDeck;
-    protected Dice dado;
+    protected Dice dado = new Dice();
    
     /**
      *
@@ -22,7 +22,6 @@ public abstract class CardDeck<T> {
     public CardDeck(){
         
         cardDeck = new ArrayList<>();
-        dado = new Dice();
         
     }
     

@@ -340,4 +340,9 @@ public class Labyrinth {
         }
     }
     
+    public void limpiaCadaverFuzzy(Player actual, Player otro){
+        players[actual.getRow()][actual.getCol()]=otro;
+    }
+    
+    
 }

@@ -17,7 +17,7 @@ import irrgartenTextUI.TextUI;
  * @author asier
  */
 public class main {
-    /*
+    
     public static void main(String[] args){
        
       // Inicializamos vista  y controlador
@@ -26,12 +26,12 @@ public class main {
       
       // Inicializamos modelo
       Game juego;
-      juego = new Game(2);
+      juego = new Game(1);
       
       // Llamamos a play
       controlador = new Controller(juego,vista);
       controlador.play();    
         
     }
-*/
+
 }

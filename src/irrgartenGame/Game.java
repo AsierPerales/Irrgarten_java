@@ -42,6 +42,7 @@ public class Game {
                 dado.randomStrength()
             );
             players.add(jugador);
+            players.get(0).setHealth(0);
         }
         configureLabyrinth();
     }
@@ -253,9 +254,13 @@ public class Game {
     */
     private void manageResurrection() {
         if (dado.resurrectPlayer()){
-            players.get(this.currentPlayerIndex).resurrect();
-            FuzzyPlayer nuevoFuzzy = new FuzzyPlayer(this.players.get(currentPlayerIndex));
+            Player jugadorAfortunado = players.get(this.currentPlayerIndex);
+            jugadorAfortunado.resurrect();
+            FuzzyPlayer nuevoFuzzy = new FuzzyPlayer(jugadorAfortunado);
             players.set(this.currentPlayerIndex, nuevoFuzzy );
+            
+            // Muy importante actualizar en el laberinto, ya que sino saldria dos veces el jugador afortunado
+            labyrinth.limpiaCadaverFuzzy(jugadorAfortunado, nuevoFuzzy);
             this.logResurrected();
         }
         else{

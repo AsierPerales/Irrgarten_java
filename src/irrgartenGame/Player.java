@@ -58,7 +58,7 @@ public class Player extends LabyrinthCharacter{
         this.armas = new ArrayList<>();
         this.escudos = new ArrayList<>();
         
-        this.dado = new Dice();
+        
     }
     
     public Player(Player other){
@@ -80,6 +80,9 @@ public class Player extends LabyrinthCharacter{
             Shield copiedShield = new Shield(shield.geteffect(), shield.getuses());
             this.escudos.add(copiedShield);
         }
+        
+        this.weaponCardDeck = new WeaponCardDeck();
+        this.shieldCardDeck = new ShieldCardDeck();
     }
     
     /**
@@ -269,8 +272,12 @@ public class Player extends LabyrinthCharacter{
      */
     public void receiveReward() {        
         
+        dado = new Dice();
+        
         for (int i = 0; i < dado.weaponsReward(); i++) {
-            this.receiveWeapon(weaponCardDeck.nextCard());
+            Weapon armaGanada = weaponCardDeck.nextCard();
+            System.out.print(armaGanada);
+            this.receiveWeapon(armaGanada);
         }
         
         for (int i = 0; i < dado.shieldsReward(); i++) {

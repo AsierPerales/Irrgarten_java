@@ -70,7 +70,7 @@ public abstract class LabyrinthCharacter {
         return strength;
     }
 
-    protected void setHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
     

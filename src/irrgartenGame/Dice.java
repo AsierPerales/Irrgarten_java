@@ -183,9 +183,9 @@ public class Dice {
        if (generator.nextFloat() < probabilidad && validMoves.contains(preferred)){
            return preferred;
        }
-       
-       int index = generator.nextInt(validMoves.size());
-       
-       return validMoves.get(index);
+       else{
+            int index = generator.nextInt(validMoves.size());
+            return validMoves.get(index);
+       }
    }
 }
