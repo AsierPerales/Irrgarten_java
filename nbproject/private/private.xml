@@ -8,6 +8,16 @@
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Weapon.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Monster.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Player.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenUI/UI.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenUI/TextUI.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenController/Controller.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenUI/GraphicalUI.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenUI/Cursors.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/GameState.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Labyrinth.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgarten/main.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/FuzzyPlayer.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Game.java</file>
         </group>
     </open-files>
 </project-private>
