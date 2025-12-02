@@ -234,9 +234,9 @@ public class Player extends LabyrinthCharacter{
      */
     @Override
     public String toString() {
-        return "Player{" + "name=Player#" + this.getNumber() + ", intelligence=" + this.getIntelligence() +
-               ", strength=" + this.getStrength() + ", health=" + this.getHealth() + ", row=" + this.getRow() + ", col=" + this.getCol() +
-               ", consecutiveHits=" + consecutiveHits + ", weapons=" + armas + ", shields=" + escudos + '}';
+        return "Player#" + this.getNumber() + ", I = " + this.getIntelligence() +
+               ", S = " + this.getStrength() + ", HP = " + this.getHealth() +
+               ", Hits = " + consecutiveHits + ", " + armas + ", " + escudos;
     }
 
     /**

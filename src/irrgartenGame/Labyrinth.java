@@ -102,7 +102,9 @@ public class Labyrinth {
 
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nCols; j++) {
-                sb.append(labyrinth[i][j]).append(" ");
+                
+               sb.append(labyrinth[i][j]).append(" ");
+                
             }
             sb.append("\n");
         }

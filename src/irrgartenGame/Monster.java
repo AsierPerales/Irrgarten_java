@@ -30,9 +30,7 @@ public class Monster extends LabyrinthCharacter{
      * @param strength la fuerza del monstruo, usada en ataques
      */
     public Monster(String name, float intelligence, float strength) {
-        
         super(name, intelligence, strength, INITIAL_HEALTH);
-        
     }
     
     
@@ -78,7 +76,9 @@ public class Monster extends LabyrinthCharacter{
      */
     @Override
     public String toString() {
-        return "M{" + "name=" + this.getName()+ ", intelligence=" + this.getIntelligence() + ", strength=" + this.getStrength() +
-               ", health=" + this.getHealth() + ", row=" + this.getRow() + ", col=" + this.getCol() + '}';
+        return "M{" + this.getName()+ ", I = " + this.getIntelligence() + ", S = " + this.getStrength() +
+               ", HP = " + this.getHealth() + ", Row = " + this.getRow() + ", Col = " + this.getCol() + '}';
     }
+
+    
 }

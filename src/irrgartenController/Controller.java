@@ -22,6 +22,7 @@ public class Controller {
             Directions direction = view.nextMove(); 
             endOfGame = game.nextStep(direction);
         }
+      game.logHaveAWinner();
       view.showGame(game.getGameState());   
     }
    

@@ -25,13 +25,7 @@ public class FuzzyPlayer extends Player {
     
     @Override
     public String toString() {
-        return "FuzzyPlayer{" + "name=Player#" + this.getNumber() + 
-                ", intelligence=" + this.getIntelligence() +
-               ", strength=" + this.getStrength() + 
-                ", health=" + this.getHealth() + 
-                ", row=" + this.getRow() + ", col=" + this.getCol() +
-               ", consecutiveHits=" + this.getConsecutiveHits() + 
-                ", weapons=" + this.getWeapons().toString() + ", shields=" + this.getShields().toString() + '}';
+        return "Fuzzy" + super.toString();
     }
     
     /**

@@ -13,6 +13,9 @@ public class Game {
     private int currentPlayerIndex;
     private String log;
     
+    private int nRows;
+    private int nCols;
+    
     private ArrayList<Player> players;
     private ArrayList<Monster> monsters;
     private Labyrinth labyrinth;
@@ -32,7 +35,11 @@ public class Game {
         players = new ArrayList<>();
         monsters = new ArrayList<>();
         log = "";
-        labyrinth = new Labyrinth(12, 20, dado.randomPos(6), dado.randomPos(10));
+        
+        nRows = 7;
+        nCols = 10;
+        
+        labyrinth = new Labyrinth(nRows, nCols, nRows/2, nCols/2);
 
         currentPlayerIndex = 0;
         for (int i = 0; i < nplayers; i++) {
@@ -42,9 +49,39 @@ public class Game {
                 dado.randomStrength()
             );
             players.add(jugador);
-            //players.get(0).setHealth(0);
+            players.get(0).setHealth(0);
         }
         configureLabyrinth();
+    }
+    
+    /**
+     * Configura el laberinto inicial del juego.
+     * Añade bloques, genera monstruos en posiciones aleatorias y 
+     * distribuye los jugadores dentro del laberinto.
+     * 
+     */
+    private void configureLabyrinth() {
+                
+        // Añadir bloques ...
+        labyrinth.addBlock(Orientation.HORIZONTAL, 0, 0, 3);
+        labyrinth.addBlock(Orientation.VERTICAL, 0, 5, 4);
+                   
+        // Añadir monstruos ...
+        int numMonstruos = 8;  
+
+        for (int k = 0; k < numMonstruos; k++) {
+            int[] pos = labyrinth.randomEmptyPos();  
+            int i = pos[0];
+            int j = pos[1];
+
+            Monster m = new Monster(nombreDeMonstruo(k), dado.randomIntelligence(), dado.randomStrength());
+            m.setPos(i, j);
+            labyrinth.addMonster(i, j, m);
+            monsters.add(m);
+        }
+        
+        labyrinth.spreadPlayers(players);
+        
     }
 
     /**
@@ -76,42 +113,20 @@ public class Game {
         );
     }
 
-    /**
-     * Configura el laberinto inicial del juego.
-     * Añade bloques, genera monstruos en posiciones aleatorias y 
-     * distribuye los jugadores dentro del laberinto.
-     * 
-     */
-    private void configureLabyrinth() {
-                
-        // Añadir bloques ...
-        labyrinth.addBlock(Orientation.HORIZONTAL, 0, 0, 3);
-        labyrinth.addBlock(Orientation.VERTICAL, 0, 5, 4);
-                   
-        // Añadir monstruos ...
-        int numMonstruos = 30;  
-
-        for (int k = 0; k < numMonstruos; k++) {
-            int[] pos = labyrinth.randomEmptyPos();  
-            int i = pos[0];
-            int j = pos[1];
-
-            String nombre = "Monster" + k;
-            Monster m = new Monster(nombre, dado.randomIntelligence(), dado.randomStrength());
-            m.setPos(i, j);
-            labyrinth.addMonster(i, j, m);
-            monsters.add(m);
-        }
-        
-        labyrinth.spreadPlayers(players);
-        
-    }
+    
 
     /**
      * Cambia el turno al siguiente jugador.
      */
     private void nextPlayer() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+    
+    /**
+     * Registra en el log que el jugador actual ha ganado un combate.
+     */
+    public void logHaveAWinner() {
+        log += "El jugador " + (this.currentPlayerIndex) + " ha ganado la partida!!!!!!!!!!!!.\n";
     }
 
     /**
@@ -154,7 +169,7 @@ public class Game {
      * o no ha podido moverse.
      */
     private void logNoMonster() {
-        log += "El jugador se ha movido a una celda vacía o le ha sido imposible moverse.\n";
+        log += "El jugador " + (this.currentPlayerIndex) + " se ha movido.\n";
     }
 
     /**
@@ -164,7 +179,7 @@ public class Game {
      * @param max número máximo de rondas permitidas.
      */
     private void logRounds(int rounds, int max) {
-        log += "Se han producido " + rounds + " de " + max + " rondas de combate.\n";
+        log += "Se han producido " + rounds + " rondas de combate.\n";
     }
     
     /**
@@ -315,6 +330,7 @@ public class Game {
         }
         else{
             Directions direction = this.actualDirection(preferredDirection);
+            
             if(direction != preferredDirection){
                this.logPlayerNoOrders();
             }
@@ -333,6 +349,19 @@ public class Game {
         }
         this.nextPlayer();
         return false;
+    }
+    
+    private String nombreDeMonstruo(int number) {
+        
+     String[] names = {
+    "Cerbero", "Medusa", "Minotauro", "Hidra", "Quimera", "Gorgona",
+    "Sátiro", "Cíclope", "Harpía", "Sirena", "Echidna", "Tifón",
+    "Empusa", "Esfinge", "Lestrigón", "Centauro", "Dracaena",
+    "Lamia", "Grifo", "Talos"
+    };
+
+    return (names[number % names.length]);
+
     }
     
     

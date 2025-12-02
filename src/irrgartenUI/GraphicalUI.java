@@ -6,6 +6,7 @@ package irrgartenUI;
 
 import irrgartenGame.GameState;
 import irrgartenGame.Directions;
+import java.awt.Font;
 
 
 /**
@@ -22,6 +23,9 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
     public GraphicalUI() {
         this.cursors = new Cursors(this,true);
         initComponents();
+        
+        TextLabyrinth.setFont(new Font("Monospaced", Font.PLAIN, 23));
+        
         setVisible(true);
     }
 
@@ -44,13 +48,12 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
         jLabel5 = new javax.swing.JLabel();
         TextLog = new javax.swing.JTextField();
         Titulo = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TextPlayers = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         TextMonsters = new javax.swing.JTextArea();
         ActualLabel = new javax.swing.JLabel();
         WinnerLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TextPlayers = new javax.swing.JTextArea();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -58,7 +61,11 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
 
         TextLabyrinth.setEditable(false);
         TextLabyrinth.setColumns(20);
+        TextLabyrinth.setLineWrap(true);
         TextLabyrinth.setRows(5);
+        TextLabyrinth.setWrapStyleWord(true);
+        TextLabyrinth.setAutoscrolls(false);
+        TextLabyrinth.setBorder(new javax.swing.border.MatteBorder(null));
         TextLabyrinth.setFocusable(false);
         jScrollPane1.setViewportView(TextLabyrinth);
 
@@ -82,6 +89,7 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
         jLabel5.setFocusable(false);
 
         TextLog.setEditable(false);
+        TextLog.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         TextLog.setText("jTextField1");
         TextLog.setFocusable(false);
         TextLog.addActionListener(this::TextLogActionPerformed);
@@ -90,110 +98,94 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Titulo.setText("Irrgarten");
 
-        TextPlayers.setEditable(false);
-        TextPlayers.setColumns(20);
-        TextPlayers.setRows(5);
-        TextPlayers.setFocusable(false);
-        jScrollPane2.setViewportView(TextPlayers);
-
-        jDesktopPane1.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         TextMonsters.setEditable(false);
         TextMonsters.setColumns(20);
+        TextMonsters.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         TextMonsters.setRows(5);
-        TextMonsters.setFocusable(false);
         jScrollPane4.setViewportView(TextMonsters);
 
+        ActualLabel.setFont(new java.awt.Font("Linux Biolinum O", 2, 24)); // NOI18N
         ActualLabel.setText("jLabel1");
 
+        WinnerLabel.setFont(new java.awt.Font("Linux Biolinum O", 2, 24)); // NOI18N
         WinnerLabel.setText("jLabel1");
+
+        TextPlayers.setEditable(false);
+        TextPlayers.setColumns(20);
+        TextPlayers.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        TextPlayers.setRows(5);
+        jScrollPane2.setViewportView(TextPlayers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)))
-                        .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextLog, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CurrentPlayerLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(HaveAWinner)
-                                        .addGap(42, 42, 42)
-                                        .addComponent(WinnerLabel)))))
-                        .addGap(18, 18, 18)
-                        .addComponent(ActualLabel)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CurrentPlayerLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ActualLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(HaveAWinner)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(WinnerLabel)))
+                        .addGap(150, 150, 150))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(39, 39, 39)
+                        .addComponent(TextLog, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CurrentPlayerLabel)
                             .addComponent(ActualLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(HaveAWinner)
-                            .addComponent(WinnerLabel))
-                        .addGap(68, 68, 68)))
+                            .addComponent(WinnerLabel)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TextLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -231,17 +223,28 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
     @Override   
     public void showGame(GameState gameState) {   
         
+        
+        
         TextMonsters.setText(gameState.getMonsters());
         TextPlayers.setText(gameState.getPlayers());
         TextLog.setText(gameState.getLog());
         TextLabyrinth.setText(gameState.getLabyrinth());
         
         ActualLabel.setText(Integer.toString(gameState.getCurrentPlayer()));
-        WinnerLabel.setText(Boolean.toString(gameState.isWinner()));
+        WinnerLabel.setText(winnerLabel( gameState.isWinner() ));
         
         repaint();
+
         
-}
+        
+    }
+    
+    private String winnerLabel(boolean winner){
+        if (winner)
+                return "Si";
+        else 
+            return "No";
+    }
 
     @Override
     public Directions nextMove() {
@@ -261,7 +264,6 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
     private javax.swing.JTextArea TextPlayers;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel WinnerLabel;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
