@@ -10,7 +10,7 @@ import irrgartenGame.Game;
 
 import irrgartenController.Controller;
 
-import irrgartenTextUI.TextUI;
+import irrgartenUI.GraphicalUI;
 
 /**
  *
@@ -21,12 +21,13 @@ public class main {
     public static void main(String[] args){
        
       // Inicializamos vista  y controlador
-      TextUI vista  = new TextUI();                        
+      //TextUI vista  = new TextUI();    
+      GraphicalUI vista = new GraphicalUI();
       Controller controlador;
       
       // Inicializamos modelo
       Game juego;
-      juego = new Game(1);
+      juego = new Game(3);
       
       // Llamamos a play
       controlador = new Controller(juego,vista);

@@ -84,6 +84,7 @@ public class GameState {
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+    
 
     /**
      *

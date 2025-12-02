@@ -32,7 +32,7 @@ public class Game {
         players = new ArrayList<>();
         monsters = new ArrayList<>();
         log = "";
-        labyrinth = new Labyrinth(6, 10, dado.randomPos(6), dado.randomPos(10));
+        labyrinth = new Labyrinth(12, 20, dado.randomPos(6), dado.randomPos(10));
 
         currentPlayerIndex = 0;
         for (int i = 0; i < nplayers; i++) {
@@ -42,7 +42,7 @@ public class Game {
                 dado.randomStrength()
             );
             players.add(jugador);
-            players.get(0).setHealth(0);
+            //players.get(0).setHealth(0);
         }
         configureLabyrinth();
     }
@@ -89,7 +89,7 @@ public class Game {
         labyrinth.addBlock(Orientation.VERTICAL, 0, 5, 4);
                    
         // Añadir monstruos ...
-        int numMonstruos = 5;  
+        int numMonstruos = 30;  
 
         for (int k = 0; k < numMonstruos; k++) {
             int[] pos = labyrinth.randomEmptyPos();  

@@ -1,12 +1,15 @@
 
-package irrgartenTextUI;
+package irrgartenUI;
 
 import irrgartenGame.Directions;
 import irrgartenGame.GameState;
 import java.util.Scanner;
 
-
-public class TextUI {
+/**
+ *
+ * @author asier
+ */
+public class TextUI implements UI {
     
     private static Scanner in = new Scanner(System.in);
     
@@ -16,6 +19,7 @@ public class TextUI {
     }
     
 
+    @Override
     public Directions nextMove() {
         System.out.print("Where? ");
         
@@ -50,6 +54,7 @@ public class TextUI {
         return direction;
     }
     
+    @Override
     public void showGame(GameState gameState) {   
         
         

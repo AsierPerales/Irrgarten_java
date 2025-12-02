@@ -276,7 +276,6 @@ public class Player extends LabyrinthCharacter{
         
         for (int i = 0; i < dado.weaponsReward(); i++) {
             Weapon armaGanada = weaponCardDeck.nextCard();
-            System.out.print(armaGanada);
             this.receiveWeapon(armaGanada);
         }
         
