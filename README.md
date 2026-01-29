@@ -61,7 +61,7 @@ El proyecto prioriza la claridad del diseño, la correcta separación de respons
 
 El proyecto se organiza siguiendo una estructura que facilita la comprensión del código y su mantenimiento:
 
-### [**Modelo**] (`src/irrgartenGame`)
+### **[Modelo] (`src/irrgartenGame`)**
 Contiene las clases que representan el **estado y comportamiento del dominio del juego**.
 
 Incluye, entre otros:
@@ -70,7 +70,7 @@ Incluye, entre otros:
 - Objetos del juego (armas, escudos, etc.).
 - Generación de valores aleatorios.
 
-### [**Controlador**] (`src/irrgartenController`)
+### **[Controlador] (`src/irrgartenController`)**
 Gestiona el **flujo del juego y la aplicación de las reglas**.
 
 Se encarga de:
@@ -79,7 +79,7 @@ Se encarga de:
 - Aplicar efectos derivados de movimientos o eventos.
 - Actualizar el estado del modelo.
 
-### [**Vista**] (`src/irrgartenUI`)
+### **[Vista] (`src/irrgartenUI`)**
 Responsable de la **presentación de la información al usuario** en una interfaz por medio de **texto o interfaz gráfica** con JFrame.
 
 Sus funciones principales son:
