@@ -5,9 +5,22 @@
 package irrgartenGame;
 
 /**
+ * Representa la orientación de ciertos elementos o estructuras
+ * dentro del laberinto, como pasillos o paredes.
+ *
+ * Puede ser {@link #VERTICAL} o {@link #HORIZONTAL}.
+ * 
+ * Este enum será útil para la generación de {@link Labyrinth} y la
+ * colocación de objetos orientados.
  *
  * @author asier
  */
 public enum Orientation {
-    VERTICAL, HORIZONTAL
+
+    /** Orientación vertical */
+    VERTICAL,
+
+    /** Orientación horizontal */
+    HORIZONTAL
 }
+

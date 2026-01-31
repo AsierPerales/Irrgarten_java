@@ -5,19 +5,17 @@
 package irrgartenGame;
 import java.util.ArrayList;
 
-/**
- *
- * @author asier
- */
-
 
 /**
  * Representa a un jugador dentro del juego.
  * 
+ * Parte del estado se copia delegando en la superclase
+ * {@link LabyrinthCharacter}, de la que hereda atributos comunes
+ * como la vida, la posición o las estadísticas básicas.
+ * 
  * Cada jugador tiene atributos de combate (fuerza, inteligencia, salud),
  * puede equiparse con armas y escudos, moverse por el laberinto, atacar,
  * defenderse, recibir recompensas y resucitar tras ser derrotado.
- * 
  * 
  * @author asier
  */
@@ -61,6 +59,20 @@ public class Player extends LabyrinthCharacter{
         
     }
     
+    /**
+    * Constructor copia.
+    * Crea un nuevo jugador duplicando el estado de otro existente.
+    * 
+    * Parte del estado se copia delegando en la superclase
+    * {@link LabyrinthCharacter}
+    *
+    * Se realiza una copia profunda del inventario de armas y escudos,
+    * evitando compartir referencias mutables entre instancias.
+    * Los mazos de cartas se reinicializan, ya que no forman parte
+    * del estado persistente del jugador.
+    *
+    * @param other jugador a copiar
+    */
     public Player(Player other){
         
         super(other);
@@ -88,7 +100,8 @@ public class Player extends LabyrinthCharacter{
     /**
      * Restaura el estado del jugador tras resucitar.
      * 
-     * El jugador recupera su salud inicial y pierde todas sus armas y escudos.
+     * El jugador recupera su salud inicial, pierde todas sus armas y escudos
+     * y reinicia su contador de golpes consecutivos
      */
     public void resurrect() {
         
@@ -104,20 +117,32 @@ public class Player extends LabyrinthCharacter{
         return this.number;
     }
 
+    /**
+     * Devuelve los golpes consecutivos efectuados por el jugador
+     * 
+     * @return número de golpes consecutivosú
+     */
     public int getConsecutiveHits() {
         return consecutiveHits;
     }
 
+    /**
+     * Devulve la lista de escudos equipados por el jugador
+     * 
+     * @return lista de escudos
+     */
     public ArrayList<Shield> getShields() {
         return escudos;
     }
 
+    /**
+     * Devulve la lista de armas equipadas por el jugador
+     * 
+     * @return lista de armas
+     */
     public ArrayList<Weapon> getWeapons() {
         return armas;
     }
-    
-    
-    
     
 
     /**
@@ -135,29 +160,6 @@ public class Player extends LabyrinthCharacter{
         }
         return direction;
     }
-    
-    /**
-     * Crea una nueva arma generada aleatoriamente con valores definidos por el dado.
-     * Obsoleto gracias a WeaponCardDeck :)
-     * @return un nuevo objeto {Weapon}
-     */
-    /*
-    private Weapon newWeapon() {
-        Dice dadoArma = new Dice();
-        return new Weapon(dadoArma.weaponPower(), dadoArma.usesLeft());
-    }
-    */
-    /**
-     * Crea un nuevo escudo generado aleatoriamente con valores definidos por el dado.
-     * Obsoleto gracias a ShieldCardDeck
-     * @return un nuevo objeto {Shield}
-     */
-    /*
-    private Shield newShield() {
-        Dice dadoEscudo = new Dice();
-        return new Shield(dadoEscudo.shieldPower(), dadoEscudo.usesLeft());
-    }
-    */
     
     /**
      * Calcula la suma del poder de ataque total de las armas equipadas.
@@ -199,7 +201,8 @@ public class Player extends LabyrinthCharacter{
      * Permite al jugador defenderse de un ataque recibido.
      *
      * @param receivedAttack intensidad del ataque recibido
-     * @return {true} si el jugador pierde el enfrentamiento, {false} si sobrevive
+     * @return {@code true} si el jugador pierde el enfrentamiento, {
+     *         {@code false} si sobrevive
      */
     @Override
     public boolean defend(float receivedAttack) {
@@ -243,7 +246,8 @@ public class Player extends LabyrinthCharacter{
      * Gestiona el resultado de un ataque recibido y determina si el jugador pierde.
      *
      * @param recievedAttack intensidad del ataque recibido
-     * @return {true} si el jugador muere o alcanza el límite de golpes consecutivos, {false} en caso contrario
+     * @return {@code true} si el jugador pierde el enfrentamiento,
+     *         {@code false} si sobrevive
      */
     private boolean manageHit(float recievedAttack) {
         float defensa = this.defensiveEnergy();
@@ -293,7 +297,7 @@ public class Player extends LabyrinthCharacter{
      * 
      * Las armas que deben ser descartadas se eliminan automáticamente.
      *
-     * @param w el arma a añadir
+     * @param w el arma recibida como recompensa
      */
     private void receiveWeapon(Weapon w) {
 
@@ -314,7 +318,7 @@ public class Player extends LabyrinthCharacter{
      * 
      * Los escudos que deben ser descartados se eliminan automáticamente.
      *
-     * @param s el escudo a añadir
+     * @param s el escudo recibido como recompensa
      */
     private void receiveShield(Shield s) {
         

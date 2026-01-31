@@ -6,10 +6,27 @@ package irrgartenGame;
  */
 
 /**
- *
+ * Representa las posibles direcciones de movimiento dentro del laberinto.
+ * 
+ * Este enum es utilizado por {@link Player} y por cualquier otra clase
+ * que gestione desplazamiento dentro del laberinto para indicar
+ * la dirección en la que se quiere mover.
+ * 
  * @author asier
  */
 public enum Directions {
-    LEFT, RIGHT, UP, DOWN
+
+    /** Movimiento hacia la izquierda */
+    LEFT,
+
+    /** Movimiento hacia la derecha */
+    RIGHT,
+
+    /** Movimiento hacia arriba */
+    UP,
+
+    /** Movimiento hacia abajo */
+    DOWN
 }
+
 

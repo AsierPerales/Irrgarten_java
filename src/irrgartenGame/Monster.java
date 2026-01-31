@@ -5,15 +5,16 @@
 package irrgartenGame;
 
 /**
- *
- * @author asier
- */
-
-/**
  * Representa a un monstruo dentro del juego, con atributos de combate como fuerza,
  * inteligencia y salud, además de su posición dentro del laberinto.
  * 
+ * Las estadísticas del monstruo se inicializan delegando en la superclase
+ * {@link LabyrinthCharacter}, de la que hereda atributos comunes
+ * como la vida, la posición o las estadísticas básicas.
+ * 
  * Los monstruos pueden atacar, defenderse, recibir daño y ser derrotados.
+ * 
+ * @author asier
  */
 
 public class Monster extends LabyrinthCharacter{
@@ -35,7 +36,8 @@ public class Monster extends LabyrinthCharacter{
     
     
     /**
-     * Realiza un ataque calculando su intensidad en función de la fuerza del monstruo.
+     * Realiza un ataque calculando su intensidad en función de la fuerza del monstruo
+     * y la clase {@link Dice}.
      *
      * @return el valor del ataque generado
      */
@@ -49,11 +51,11 @@ public class Monster extends LabyrinthCharacter{
     /**
      * Permite al monstruo defenderse de un ataque recibido.
      * 
-     * Se calcula una energía defensiva en función de su inteligencia.
+     * Se calcula una energía defensiva en función de su inteligencia y el dado.
      * Si esta energía es menor que la intensidad del ataque recibido, el monstruo resulta herido.
      *
      * @param recievedAttack la intensidad del ataque recibido
-     * @return {true} si el monstruo muere tras el ataque, {false} en caso contrario
+     * @return {@code true} si el monstruo muere tras el ataque, {@code false} en caso contrario
      */
     @Override
     public boolean defend(float recievedAttack) {

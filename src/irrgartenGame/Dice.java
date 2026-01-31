@@ -8,10 +8,20 @@ import java.util.Random;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que simula la generación de valores aleatorios para distintos aspectos
+ * del juego, como fuerza, inteligencia, potencia de armas y escudos,
+ * probabilidades de resurrección y recompensas tras combates.
+ * 
+ * Internamente utiliza un generador de números aleatorios
+ * {@link java.util.Random} para producir estos valores.
+ * 
+ * Los valores máximos para los atributos y recompensas están definidos
+ * mediante constantes.
+ * 
  * @author asier
  */
 public class Dice {
+    
     private static final int MAX_USES = 5; //(número máximo de usos de armas y escudos)
     private static final float MAX_INTELLIGENCE = 10.0f; //(valor máximo para la inteligencia de jugadores y monstruos)
     private static final float MAX_STRENGTH = 10.0f; //(valor máximo para la fuerza de jugadores y monstruos)
@@ -22,13 +32,18 @@ public class Dice {
     private static final int MAX_ATTACK = 3; //(máxima potencia de las armas)
     private static final int MAX_SHIELD = 2; //(máxima potencia de los escudos)
     
+    /** Generador de números aleatorios utilizado para todos los cálculos. */
     private java.util.Random generator;
 
+    /**
+     * Constructor que inicializa el generador aleatorio {@link java.util.Random}.
+     */
     public Dice() {
         Random generador;
         generador = new Random();
         this.generator = generador;
     }
+
     
     
     
@@ -97,7 +112,9 @@ public class Dice {
 
    /**
     * Devuelve la cantidad de escudos obtenidos como recompensa al ganar
-    * un combate. El valor está en el intervalo [0, SHIELDS_REWARD].
+    * un combate. 
+    * 
+    * El valor está en el intervalo [0, SHIELDS_REWARD].
     *
     * @return número de escudos de recompensa
     */
@@ -131,7 +148,7 @@ public class Dice {
     * @return poder del escudo
     */
    public float shieldPower() {
-        float sPower = generator.nextFloat(MAX_SHIELD);
+       float sPower = generator.nextFloat(MAX_SHIELD);
        return Math.round(sPower * 100) / 100f;   }
 
    /**
@@ -175,7 +192,7 @@ public class Dice {
      * @param preferred direccion preferente
      * @param validMoves direcciones validas
      * @param intelligence inteligencia del jugador que llama al metodo
-     * @return direccion de movimiento preferente || adireccion valida al azar
+     * @return dirección de movimiento preferente || direccion válida al azar
      */
     public Directions nextStep(Directions preferred, ArrayList<Directions> validMoves, float intelligence){
        float probabilidad = intelligence/MAX_INTELLIGENCE;

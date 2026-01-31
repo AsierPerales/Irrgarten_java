@@ -25,7 +25,8 @@ public class Game {
     
     /**
      * Constructor de la clase Game. 
-     * Inicializa el juego con el número de jugadores indicado, crea el laberinto 
+     * Inicializa el juego con el número de jugadores indicado, crea la instancia de {@link Labyrinth}
+     * con su constructor correspondiente
      * y genera los jugadores con valores aleatorios de inteligencia y fuerza.
      *
      * @param nplayers número de jugadores que participarán en la partida.
@@ -58,6 +59,10 @@ public class Game {
      * Configura el laberinto inicial del juego.
      * Añade bloques, genera monstruos en posiciones aleatorias y 
      * distribuye los jugadores dentro del laberinto.
+     * 
+     * {@link Orientation}
+     * {@link Monster}
+     * {@link Player}
      * 
      */
     private void configureLabyrinth() {
@@ -99,7 +104,7 @@ public class Game {
      * los jugadores, los monstruos, el jugador actual, el estado de finalización
      * y el registro de eventos.
      *
-     * @return un objeto {GameState} que contiene toda la información
+     * @return un objeto {@link GameState} que contiene toda la información
      *         relevante sobre el estado del juego.
      */
     public GameState getGameState() {
@@ -188,6 +193,8 @@ public class Game {
     * A partir de una dirección preferida, se obtienen los movimientos válidos
     * desde la posición actual del jugador en el laberinto, y luego se decide
     * la dirección final basándose en esas opciones.
+    * 
+    * {@link Directions}
     *
     * @param preferredDirection la dirección que el jugador intenta tomar inicialmente
     * @return la dirección efectiva en la que el jugador se moverá
@@ -205,12 +212,12 @@ public class Game {
     
     /**
     * Ejecuta un combate entre el jugador actual y un monstruo.
-    * <p>
+    * 
     * El combate se desarrolla por rondas alternadas de ataque y defensa entre el jugador
     * y el monstruo, hasta que uno de los dos es derrotado o se alcanza el número máximo
     * de rondas permitidas. El método determina y devuelve el ganador del enfrentamiento.
     *
-    * @param monster el monstruo con el que combate el jugador actual
+    * @param monster el {@link Monster} con el que combate el jugador actual
     * @return el personaje que gana el combate ( {GameCharacter.PLAYER} o {GameCharacter.MONSTER})
     */
     private GameCharacter combat(Monster monster) {
@@ -234,36 +241,13 @@ public class Game {
         this.logRounds(rounds, MAX_ROUNDS);
         
         return ganador;
-        /* PORPUESTA DECENTE :)
-        private GameCharacter combat(Monster monster) {
-        Player player = players.get(this.currentPlayerIndex);
-        int rounds = 0;
-        while (rounds < MAX_ROUNDS) {
-            rounds++;
-            // Turno del jugador
-            boolean monsterDefeated = monster.defend(player.attack());
-            if (monsterDefeated) {
-                return GameCharacter.PLAYER;
-            }
-            // Turno del monstruo
-            boolean playerDefeated = player.defend(monster.attack());
-            if (playerDefeated) {
-                return GameCharacter.MONSTER;
-            }
-        }
-        // Si se llega aquí, se acabaron los turnos
-        this.logRounds(rounds, MAX_ROUNDS);
-
-        return GameCharacter.PLAYER; 
-        }
-
-        */
+       
     }
     
     /**
     * Gestiona la posible resurrección del jugador actual tras haber sido derrotado.
     * 
-    * Si el dado determina que el jugador puede resucitar, este es revivido, convertido en FuzzyPlayer 
+    * Si el dado determina que el jugador puede resucitar, este es revivido, convertido en {@link FuzzyPlayer} 
     * y se registra en log.
     * En caso contrario, el jugador pierde su turno y también se deja constancia en el log.
     */
@@ -290,7 +274,7 @@ public class Game {
     * Si el jugador resulta vencedor, recibe su recompensa y se registra en log.
     * En caso contrario, se registra la victoria del monstruo.
     *
-    * @param winner el personaje que ganó el combate ({GameCharacter.PLAYER} o {GameCharacter.MONSTER})
+    * @param winner el personaje que ganó el combate ({@link GameCharacter.PLAYER} o {@link GameCharacter.MONSTER})
     */
     private void manageReward(GameCharacter winner) {
         if (winner == GameCharacter.PLAYER){
@@ -319,7 +303,7 @@ public class Game {
     * el turno al siguiente jugador.
     *
     * @param preferredDirection la dirección en la que el jugador desea moverse
-    * @return {true} si el juego ha finalizado, {false} en caso contrario
+    * @return {@code true} si el juego ha finalizado, {@code false} en caso contrario
     */
     public boolean nextStep(Directions preferredDirection) {
         this.log = "";
@@ -342,6 +326,7 @@ public class Game {
             else{
                 GameCharacter winner = this.combat(monstruo);
                 this.manageReward(winner);
+              
             }
         }
         if(this.finished()){
@@ -351,6 +336,12 @@ public class Game {
         return false;
     }
     
+    /**
+     * Función que permite añadir identidades más interesantes a los monstruos
+     * 
+     * @param number número asignado al monstruo en su inicialización.
+     * @return 
+     */
     private String nombreDeMonstruo(int number) {
         
      String[] names = {

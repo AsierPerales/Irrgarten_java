@@ -5,9 +5,18 @@
 package irrgartenGame;
 
 /**
+ * Representa los tipos de personajes que existen en el juego.
+ *
+ * Se utiliza para identificar si un personaje es {@link #PLAYER}
+ * o {@link #MONSTER} en métodos como {@link Game#combat(Monster)}.
  *
  * @author asier
  */
 public enum GameCharacter {
-    PLAYER,MONSTER
+
+    /** Personaje controlado por el jugador */
+    PLAYER,
+
+    /** Personaje controlado por el sistema o IA */
+    MONSTER
 }

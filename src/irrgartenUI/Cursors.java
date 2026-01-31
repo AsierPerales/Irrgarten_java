@@ -6,29 +6,45 @@ package irrgartenUI;
 import irrgartenGame.Directions;
 
 /**
- *
+ * Diálogo modal para que el usuario seleccione la dirección de movimiento.
+ * 
+ * Esta clase extiende a {@link javax.swing.JDialog} y se utiliza principalmente desde 
+ * {@link GraphicalUI} para capturar la dirección del jugador de manera gráfica.  
+ * 
+ * La dirección seleccionada se almacena en {@link #direction} y se devuelve
+ * al llamar a {@link #getDirection()}.
+ * 
+ * 
  * @author asier
  */
 public class Cursors extends javax.swing.JDialog {
-    
+
+    /** Logger de la clase para depuración. */
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Cursors.class.getName());
+
+    /** Dirección seleccionada por el usuario. */
     Directions direction;
-    
+
     /**
-     * Creates new form Cursors
-     * @param parent
-     * @param modal
+     * Crea un nuevo diálogo de selección de dirección.
+     * 
+     * @param parent Frame padre sobre el que se centra el diálogo
+     * @param modal true si el diálogo debe ser modal, false si no
      */
     public Cursors(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
-    public Directions getDirection(){
+
+    /**
+     * Muestra el diálogo y devuelve la dirección seleccionada por el usuario.
+     * 
+     * @return {@link Directions} elegida por el usuario
+     */
+    public Directions getDirection() {
         this.setVisible(true);
         return direction;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,6 +108,24 @@ public class Cursors extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Métodos manejadores de eventos para la selección de dirección.
+    * 
+    * Cada botón de dirección (UP, DOWN, LEFT, RIGHT) ejecuta un método
+    * {@code *ActionPerformed} que:
+    * 1. Asigna la dirección correspondiente al atributo {@link #direction}.
+    * 2. Cierra el diálogo mediante {@link #dispose()} para que la ventana
+    *    que llamó a {@link #getDirection()} pueda continuar su ejecución
+    *    con la dirección seleccionada.
+    * 
+    * Todos estos métodos reciben un {@link java.awt.event.ActionEvent} como parámetro,
+    * que contiene información sobre la interacción del usuario con el botón.
+    * 
+    * Este patrón asegura que el diálogo se comporte como un selector modal de direcciones,
+    * devolviendo de manera segura la elección del usuario a la ventana principal
+    * (por ejemplo, {@link GraphicalUI}).
+    */
+
     private void LEFTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LEFTActionPerformed
         this.direction = Directions.LEFT;
         this.dispose();
@@ -116,9 +150,6 @@ public class Cursors extends javax.swing.JDialog {
     }//GEN-LAST:event_UPActionPerformed
 
     
-    /**
-     * @param args the command line arguments
-     */
     
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */

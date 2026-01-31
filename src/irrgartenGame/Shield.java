@@ -5,46 +5,43 @@
 package irrgartenGame;
 
 /**
+ * Representa un escudo utilizado como elemento defensivo en combate.
+ * Extiende la funcionalidad común definida en {@link CombatElement}.
  *
  * @author asier
  */
 public class Shield extends CombatElement {
-    
-    
-    /*
-     * Delega en el constructor de CombatElement
+
+    /**
+     * Constructor del escudo.
+     * Delega la inicialización en el constructor de {@link CombatElement}.
+     *
+     * @param protection Valor de protección del escudo
+     * @param uses Número de usos disponibles
      */
     public Shield(float protection, int uses) {
-        super(protection, uses);        
-
+        super(protection, uses);
     }
 
     /**
+     * Utiliza el escudo para proteger.
+     * Si el escudo dispone de usos restantes, devuelve su valor de protección
+     * y consume un uso; en caso contrario, devuelve 0.
      *
-     * @return Estadisticas de proteccion y usos restantes de una instancia de Shield
+     * @return Valor de protección aplicado, o 0 si no quedan usos
+     */
+    public float protect(){
+        return this.produceEffect();
+    }
+
+    /**
+     * Representación textual del escudo, mostrando su protección
+     * y el número de usos restantes.
+     *
+     * @return Cadena descriptiva del escudo
      */
     @Override
     public String toString() {
         return "S[" + this.geteffect() + ", " + this.getuses() + ']';
     }
-    
-    /**
-     * Utiliza el escudo si y solo si tiene usos restantes, si no devuelve usos (0)
-     * @return si usos > 0 devuelve @protection, si no devuelve @uses (0) 
-     */
-    public float protect(){
-        return this.produceEffect();
-    }
-    
-     /** YA IMPLEMENTADO EN COMBATELEMENT!! QUE GUAY !!!!!
-     *
-     * @return si el escudo de descarta o no segun usos. Delega esto en discardElement de Dice
-     */
-    
-    /*
-    public boolean discard(){
-        return dado.discardElement(uses);
-    }
-    */
-    
 }

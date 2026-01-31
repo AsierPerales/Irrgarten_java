@@ -8,24 +8,40 @@ import irrgartenGame.GameState;
 import irrgartenGame.Directions;
 import java.awt.Font;
 
-
 /**
- *
+ * Implementación gráfica de {@link UI} utilizando {@link javax.swing.JFrame}.
+ * 
+ * Esta clase muestra el estado del juego en una ventana Swing, mostrando:
+ * <ul>
+ *   <li>El laberinto ({@link #TextLabyrinth})</li>
+ *   <li>Jugadores ({@link #TextPlayers})</li>
+ *   <li>Monstruos ({@link #TextMonsters})</li>
+ *   <li>Registro de eventos ({@link #TextLog})</li>
+ *   <li>Jugador actual ({@link #ActualLabel})</li>
+ *   <li>Si hay ganador ({@link #WinnerLabel})</li>
+ * </ul>
+ * 
+ * La dirección de movimiento del usuario se obtiene mediante la clase {@link Cursors}.
+ * 
  * @author asier
  */
 public class GraphicalUI extends javax.swing.JFrame implements UI {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GraphicalUI.class.getName());
+    
+    /** Gestiona la entrada del usuario para seleccionar la dirección de movimiento 
+     *  {@link Cursors}
+     */
     private Cursors cursors;
+
     /**
-     * Creates new form GraphicalUI
+     * Crea una nueva interfaz gráfica y la inicializa.
+     * Configura los componentes Swing y la fuente de {@link #TextLabyrinth}.
      */
     public GraphicalUI() {
         this.cursors = new Cursors(this,true);
         initComponents();
-        
         TextLabyrinth.setFont(new Font("Monospaced", Font.PLAIN, 23));
-        
         setVisible(true);
     }
 
@@ -219,37 +235,48 @@ public class GraphicalUI extends javax.swing.JFrame implements UI {
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(() -> new GraphicalUI().setVisible(true));
 //    }
-    
-    @Override   
+
+    /**
+     * Muestra el estado del juego en la interfaz gráfica.
+     * 
+     * Actualiza los componentes:
+     * {@link #TextMonsters}, {@link #TextPlayers}, {@link #TextLog}, {@link #TextLabyrinth},
+     * {@link #ActualLabel} y {@link #WinnerLabel}.
+     *
+     * @param gameState el {@link GameState} que contiene la información actual del juego
+     */
+    @Override
     public void showGame(GameState gameState) {   
-        
-        
-        
         TextMonsters.setText(gameState.getMonsters());
         TextPlayers.setText(gameState.getPlayers());
         TextLog.setText(gameState.getLog());
         TextLabyrinth.setText(gameState.getLabyrinth());
         
         ActualLabel.setText(Integer.toString(gameState.getCurrentPlayer()));
-        WinnerLabel.setText(winnerLabel( gameState.isWinner() ));
+        WinnerLabel.setText(winnerLabel(gameState.isWinner()));
         
         repaint();
-
-        
-        
     }
+
     
+    /**
+     * Convierte un valor booleano en una cadena para la etiqueta de ganador.
+     * 
+     * @param winner true si hay ganador, false si no
+     * @return "Si" si winner es true, "No" en caso contrario
+     */
     private String winnerLabel(boolean winner){
-        if (winner)
-                return "Si";
-        else 
-            return "No";
+        return winner ? "Si" : "No";
     }
 
+    /**
+     * Devuelve la dirección de movimiento seleccionada por el usuario
+     * mediante la clase {@link Cursors}.
+     * 
+     * @return {@link Directions} elegida por el usuario
+     */
     @Override
     public Directions nextMove() {
-        
-        // Devuelve la dirección seleccionada por el usuario
         return this.cursors.getDirection();
     }
 

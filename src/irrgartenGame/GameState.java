@@ -7,19 +7,43 @@ package irrgartenGame;
 import java.util.ArrayList;
 
 /**
- *
+ * Representa el estado completo del juego en un momento dado.
+ * 
+ * Contiene la información sobre:
+ * <ul>
+ *   <li>El laberinto como cadena</li>
+ *   <li>Los jugadores activos ({@link Player})</li>
+ *   <li>Los monstruos activos ({@link Monster})</li>
+ *   <li>El índice del jugador actual</li>
+ *   <li>Si hay un ganador</li>
+ *   <li>El registro de eventos recientes</li>
+ * </ul>
+ * 
+ * Esta clase es útil para almacenar snapshots del juego, serializar el estado
+ * o actualizar interfaces gráficas.
+ * 
  * @author asier
  */
 public class GameState {
 
-    // Atributos de instancia privados
+    /** Representación textual del {@link Labyrinth} */
     private String labyrinth;
-    private ArrayList<Player> players;
-    private ArrayList<Monster> monsters;
-    private int currentPlayer;
-    private boolean winner;
-    private String log;
 
+    /** Lista de {@link Player} que participan en el juego */
+    private ArrayList<Player> players;
+
+    /** Lista de {@link Monster} que participan en el juego */
+    private ArrayList<Monster> monsters;
+
+    /** Índice del {@link Player} que tiene el turno actual */
+    private int currentPlayer;
+
+    /** Indica si ya existe un ganador en la partida */
+    private boolean winner;
+
+    /** Registro de eventos recientes en el juego */
+    private String log;
+    
     /**
      * Constructor de GameState.
      * Inicializa todos los atributos del estado del juego.
@@ -43,7 +67,7 @@ public class GameState {
 
     /**
      *
-     * @return instancia del laberinto (en forma de String) contenido en GameState
+     * @return instancia de {@link Labyrinth} (en forma de {@code String}) contenido en {@link GameState}
      */
     public String getLabyrinth() {
         return labyrinth;
@@ -51,7 +75,7 @@ public class GameState {
 
     /**
      *
-     * Convierto el ArrayList de jugadores en String para que quede mas bonito :)
+     * Convierte el ArrayList de jugadores en String.
      * 
      * @return String que representa los jugadores en la partida
      */
@@ -65,7 +89,7 @@ public class GameState {
 
     /**
      *
-     * Convierto el ArrayList de monstruos en String para que quede mas bonito :)
+     * Convierte el ArrayList de monstruos en String.
      * 
      * @return String que representa los monstruos en la partida
      */
