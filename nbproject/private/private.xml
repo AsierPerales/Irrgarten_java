@@ -5,7 +5,6 @@
         <group>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/GameCharacter.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/LabyrinthCharacter.java</file>
-            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Weapon.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Monster.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Player.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenUI/UI.java</file>
@@ -20,6 +19,16 @@
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Game.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/CardDeck.java</file>
             <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Dice.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/ShieldCardDeck.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/WeaponCardDeck.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/CombatElement.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/TestP1.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/TestP2.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/TestP4.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Shield.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Weapon.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Directions.java</file>
+            <file>file:/home/asier/NetBeansProjects/irrgarten/src/irrgartenGame/Orientation.java</file>
         </group>
     </open-files>
 </project-private>
