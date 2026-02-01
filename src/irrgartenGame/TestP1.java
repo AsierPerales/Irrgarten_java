@@ -5,6 +5,26 @@
 package irrgartenGame;
 
 /**
+ * La clase {@code TestP1} se utiliza como clase de prueba para la Práctica 1.
+ * <p>
+ * Su objetivo es verificar el correcto funcionamiento de las clases implementadas
+ * en la práctica mediante la creación de instancias y la llamada a todos sus métodos.
+ *
+ * En esta clase se prueban, entre otros:
+ * <ul>
+ *   <li>Las clases {@link Weapon} y {@link Shield}, comprobando su comportamiento
+ *       y representación en texto</li>
+ *   <li>Los tipos enumerados {@link Directions}, {@link Orientation} y
+ *       {@link GameCharacter}</li>
+ *   <li>La clase {@link Dice}, llamando repetidamente a sus métodos para observar
+ *       la distribución de los valores aleatorios generados</li>
+ * </ul>
+ *
+ * El método {@code main} (comentado en esta versión) ejecuta una batería de pruebas
+ * creando objetos de ejemplo y mostrando los resultados por consola.
+ *
+ * Esta clase no forma parte de la lógica del juego, sino que sirve exclusivamente
+ * como apoyo para pruebas y validación del código desarrollado.
  *
  * @author asier
  */

@@ -5,6 +5,14 @@
 package irrgartenGame;
 
 /**
+ * La clase {@code ShieldCardDeck} representa un mazo de cartas de tipo {@link Shield}.
+ * <p>
+ * Es una especialización de {@link CardDeck} que define la forma concreta en la que
+ * se generan y añaden las cartas de escudo al mazo.
+ *
+ * Cada vez que el mazo se reconstruye, se crean un número fijo de cartas {@code Shield}
+ * cuyos atributos (potencia del escudo y usos restantes) se generan de forma aleatoria
+ * mediante un dado, por lo que el contenido del mazo puede variar entre partidas.
  *
  * @author asier
  */

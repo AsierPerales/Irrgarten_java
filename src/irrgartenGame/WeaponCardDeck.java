@@ -5,6 +5,14 @@
 package irrgartenGame;
 
 /**
+ * La clase {@code WeaponCardDeck} representa un mazo de cartas de tipo {@link Weapon}.
+ * <p>
+ * Es una especialización de {@link CardDeck} que define la forma concreta en la que
+ * se generan y añaden las cartas de arma al mazo.
+ *
+ * Cada vez que el mazo se reconstruye, se crean un número fijo de cartas {@code Weapon}
+ * cuyos atributos (potencia del arma y usos restantes) se generan de forma aleatoria
+ * mediante un dado, por lo que el contenido del mazo puede variar entre partidas.
  *
  * @author asier
  */

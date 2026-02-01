@@ -5,6 +5,22 @@
 package irrgartenGame;
 import java.util.ArrayList;
 /**
+ * La clase {@code Game} representa el controlador principal de una partida.
+ * <p>
+ * Se encarga de gestionar el estado global del juego, incluyendo:
+ * <ul>
+ *   <li>La lista de jugadores y monstruos</li>
+ *   <li>El laberinto donde se desarrolla la partida</li>
+ *   <li>El turno actual y el jugador activo</li>
+ *   <li>El número máximo de rondas permitidas</li>
+ *   <li>El registro de eventos del juego y la generación de eventos aleatorios mediante un dado</li>
+ * </ul>
+ *
+ * El juego avanza por rondas, en las que cada jugador realiza su turno
+ * interactuando con el laberinto, los monstruos y el resto de elementos del juego,
+ * hasta que se alcanza el número máximo de rondas o se cumple una condición de fin.
+ *
+ * Esta clase actúa como el núcleo coordinador de todas las entidades del juego.
  *
  * @author asier
  */

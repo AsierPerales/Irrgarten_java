@@ -6,6 +6,27 @@ package irrgartenGame;
 import java.util.ArrayList;
 
 /**
+ * La clase {@code TestP4} se utiliza como clase de prueba para la Práctica 4.
+ * <p>
+ * Su objetivo es comprobar el correcto funcionamiento de las nuevas
+ * funcionalidades introducidas en esta práctica, especialmente las relacionadas
+ * con el manejo de mazos de cartas y el comportamiento del jugador difuso.
+ *
+ * En esta clase se realizan pruebas sobre:
+ * <ul>
+ *   <li>La clase {@link CardDeck} y sus especializaciones
+ *       {@link WeaponCardDeck} y {@link ShieldCardDeck}, verificando la
+ *       generación y extracción de cartas</li>
+ *   <li>La clase {@link FuzzyPlayer}, comprobando su comportamiento en ataque,
+ *       defensa y movimiento en base a decisiones no deterministas</li>
+ * </ul>
+ *
+ * El método {@code main} (comentado en esta versión) ejecuta distintas pruebas
+ * creando instancias de ejemplo y mostrando por consola los resultados obtenidos.
+ *
+ * Esta clase no forma parte de la lógica principal del juego, sino que actúa
+ * como una herramienta de validación y comprobación del código desarrollado
+ * en la práctica.
  *
  * @author asier
  */
