@@ -66,7 +66,7 @@ public class Game {
                 dado.randomStrength()
             );
             players.add(jugador);
-            players.get(0).setHealth(0);
+
         }
         configureLabyrinth();
     }
